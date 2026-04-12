@@ -1,21 +1,5 @@
 [
   {
-    "id": 2,
-    "name": "Sunshine Burst",
-    "cat": "birthday",
-    "emoji": "🌻",
-    "imageUrl": "",
-    "base": 650,
-    "badge": null,
-    "stock": 20,
-    "desc": "A vibrant, cheerful mix of sunflowers and gerberas that radiates pure joy.",
-    "sizes": {
-      "Small": 650,
-      "Medium": 950,
-      "Premium": 1450
-    }
-  },
-  {
     "id": 3,
     "name": "Pure White Elegance",
     "cat": "wedding",
