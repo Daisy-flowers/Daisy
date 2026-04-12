@@ -1,21 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Rose Romance",
-    "cat": "anniversary",
-    "emoji": "🌹",
-    "imageUrl": "",
-    "base": 850,
-    "badge": "Bestseller",
-    "stock": 15,
-    "desc": "A timeless blend of premium red roses, symbolizing deep love and lasting affection.",
-    "sizes": {
-      "Small": 850,
-      "Medium": 1200,
-      "Premium": 1800
-    }
-  },
-  {
     "id": 2,
     "name": "Sunshine Burst",
     "cat": "birthday",
