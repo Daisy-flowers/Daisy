@@ -1,21 +1,5 @@
 [
   {
-    "id": 7,
-    "name": "Orchid Love",
-    "cat": "anniversary",
-    "emoji": "🌺",
-    "imageUrl": "",
-    "base": 1200,
-    "badge": "Luxury",
-    "stock": 6,
-    "desc": "Exotic orchids arranged with lush tropical greenery.",
-    "sizes": {
-      "Small": 1200,
-      "Medium": 1700,
-      "Premium": 2500
-    }
-  },
-  {
     "id": 8,
     "name": "Tulip Joy",
     "cat": "birthday",
