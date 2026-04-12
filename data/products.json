@@ -1,21 +1,5 @@
 [
   {
-    "id": 3,
-    "name": "Pure White Elegance",
-    "cat": "wedding",
-    "emoji": "🤍",
-    "imageUrl": "",
-    "base": 1500,
-    "badge": "Popular",
-    "stock": 8,
-    "desc": "Graceful white lilies, roses and baby's breath composed into a bridal masterpiece.",
-    "sizes": {
-      "Small": 1500,
-      "Medium": 2100,
-      "Premium": 3200
-    }
-  },
-  {
     "id": 4,
     "name": "Gentle Farewell",
     "cat": "sympathy",
