@@ -1,21 +1,5 @@
 [
   {
-    "id": 8,
-    "name": "Tulip Joy",
-    "cat": "birthday",
-    "emoji": "🌷",
-    "imageUrl": "",
-    "base": 600,
-    "badge": null,
-    "stock": 22,
-    "desc": "Fresh, colorful tulips arranged in a delightful spring-inspired bundle.",
-    "sizes": {
-      "Small": 600,
-      "Medium": 900,
-      "Premium": 1350
-    }
-  },
-  {
     "id": 9,
     "name": "Bridal Bliss",
     "cat": "wedding",
