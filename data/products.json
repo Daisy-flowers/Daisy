@@ -1,21 +1,5 @@
 [
   {
-    "id": 4,
-    "name": "Gentle Farewell",
-    "cat": "sympathy",
-    "emoji": "🪷",
-    "imageUrl": "",
-    "base": 900,
-    "badge": null,
-    "stock": 10,
-    "desc": "A serene arrangement of soft white and lavender blooms.",
-    "sizes": {
-      "Small": 900,
-      "Medium": 1250,
-      "Premium": 1750
-    }
-  },
-  {
     "id": 5,
     "name": "Pink Dream",
     "cat": "birthday",
