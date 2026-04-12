@@ -1,21 +1,5 @@
 [
   {
-    "id": 5,
-    "name": "Pink Dream",
-    "cat": "birthday",
-    "emoji": "🌸",
-    "imageUrl": "",
-    "base": 750,
-    "badge": "New",
-    "stock": 18,
-    "desc": "Soft pink roses and carnations beautifully wrapped.",
-    "sizes": {
-      "Small": 750,
-      "Medium": 1100,
-      "Premium": 1600
-    }
-  },
-  {
     "id": 6,
     "name": "Wildflower Mix",
     "cat": "custom",
