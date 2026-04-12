@@ -16,22 +16,6 @@
     }
   },
   {
-    "id": 10,
-    "name": "Daisy's Special",
-    "cat": "custom",
-    "emoji": "🌼",
-    "imageUrl": "",
-    "base": 950,
-    "badge": "Signature",
-    "stock": 9,
-    "desc": "Our own signature creation — let us surprise you.",
-    "sizes": {
-      "Small": 950,
-      "Medium": 1350,
-      "Premium": 2000
-    }
-  },
-  {
     "id": 11,
     "name": "Tulip",
     "emoji": "🌸",
