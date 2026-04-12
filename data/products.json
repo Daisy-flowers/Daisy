@@ -8,11 +8,7 @@
     "stock": 5,
     "desc": "",
     "imageUrl": "https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/images/1775984117938_1000177461.png",
-    "base": 500,
-    "sizes": {
-      "Small": 500,
-      "Medium": 1200,
-      "Premium": 2000
-    }
+    "price": 500,
+    "base": 500
   }
 ]
