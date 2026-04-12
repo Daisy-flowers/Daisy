@@ -1,21 +1,5 @@
 [
   {
-    "id": 6,
-    "name": "Wildflower Mix",
-    "cat": "custom",
-    "emoji": "💐",
-    "imageUrl": "",
-    "base": 700,
-    "badge": null,
-    "stock": 12,
-    "desc": "A hand-picked selection from our freshest seasonal arrivals.",
-    "sizes": {
-      "Small": 700,
-      "Medium": 1000,
-      "Premium": 1500
-    }
-  },
-  {
     "id": 7,
     "name": "Orchid Love",
     "cat": "anniversary",
