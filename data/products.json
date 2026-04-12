@@ -1,21 +1,5 @@
 [
   {
-    "id": 9,
-    "name": "Bridal Bliss",
-    "cat": "wedding",
-    "emoji": "👰",
-    "imageUrl": "",
-    "base": 2000,
-    "badge": "Premium",
-    "stock": 4,
-    "desc": "A grand bridal bouquet with cascading white roses and peonies.",
-    "sizes": {
-      "Small": 2000,
-      "Medium": 2800,
-      "Premium": 4200
-    }
-  },
-  {
     "id": 10,
     "name": "Daisy's Special",
     "cat": "custom",
