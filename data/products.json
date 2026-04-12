@@ -1,18 +1,13 @@
 [
   {
-    "id": 11,
+    "id": 1,
     "name": "Tulip",
     "emoji": "🌸",
     "cat": "custom",
-    "badge": "Bestseller",
-    "stock": 5,
+    "badge": "New",
+    "stock": 10,
     "desc": "",
-    "imageUrl": "https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/images/1775984117938_1000177461.png",
-    "base": 500,
-    "sizes": {
-      "Small": 500,
-      "Medium": 1200,
-      "Premium": 2000
-    }
+    "imageUrl": "https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/images/1775992186369_1000177460.jpg",
+    "price": 850
   }
 ]
