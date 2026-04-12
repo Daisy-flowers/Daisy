@@ -1,12 +1,178 @@
 [
-  { "id":1,  "name":"Rose Romance",        "cat":"anniversary", "emoji":"🌹", "imageUrl":"", "base":850,  "badge":"Bestseller", "stock":15, "desc":"A timeless blend of premium red roses, symbolizing deep love and lasting affection.", "sizes":{"Small":850,  "Medium":1200, "Premium":1800} },
-  { "id":2,  "name":"Sunshine Burst",      "cat":"birthday",    "emoji":"🌻", "imageUrl":"", "base":650,  "badge":null,         "stock":20, "desc":"A vibrant, cheerful mix of sunflowers and gerberas that radiates pure joy.",         "sizes":{"Small":650,  "Medium":950,  "Premium":1450} },
-  { "id":3,  "name":"Pure White Elegance", "cat":"wedding",     "emoji":"🤍", "imageUrl":"", "base":1500, "badge":"Popular",    "stock":8,  "desc":"Graceful white lilies, roses and baby's breath composed into a bridal masterpiece.", "sizes":{"Small":1500, "Medium":2100, "Premium":3200} },
-  { "id":4,  "name":"Gentle Farewell",     "cat":"sympathy",    "emoji":"🪷", "imageUrl":"", "base":900,  "badge":null,         "stock":10, "desc":"A serene arrangement of soft white and lavender blooms.",                            "sizes":{"Small":900,  "Medium":1250, "Premium":1750} },
-  { "id":5,  "name":"Pink Dream",          "cat":"birthday",    "emoji":"🌸", "imageUrl":"", "base":750,  "badge":"New",        "stock":18, "desc":"Soft pink roses and carnations beautifully wrapped.",                                "sizes":{"Small":750,  "Medium":1100, "Premium":1600} },
-  { "id":6,  "name":"Wildflower Mix",      "cat":"custom",      "emoji":"💐", "imageUrl":"", "base":700,  "badge":null,         "stock":12, "desc":"A hand-picked selection from our freshest seasonal arrivals.",                      "sizes":{"Small":700,  "Medium":1000, "Premium":1500} },
-  { "id":7,  "name":"Orchid Love",         "cat":"anniversary", "emoji":"🌺", "imageUrl":"", "base":1200, "badge":"Luxury",     "stock":6,  "desc":"Exotic orchids arranged with lush tropical greenery.",                              "sizes":{"Small":1200, "Medium":1700, "Premium":2500} },
-  { "id":8,  "name":"Tulip Joy",           "cat":"birthday",    "emoji":"🌷", "imageUrl":"", "base":600,  "badge":null,         "stock":22, "desc":"Fresh, colorful tulips arranged in a delightful spring-inspired bundle.",           "sizes":{"Small":600,  "Medium":900,  "Premium":1350} },
-  { "id":9,  "name":"Bridal Bliss",        "cat":"wedding",     "emoji":"👰", "imageUrl":"", "base":2000, "badge":"Premium",    "stock":4,  "desc":"A grand bridal bouquet with cascading white roses and peonies.",                    "sizes":{"Small":2000, "Medium":2800, "Premium":4200} },
-  { "id":10, "name":"Daisy's Special",     "cat":"custom",      "emoji":"🌼", "imageUrl":"", "base":950,  "badge":"Signature",  "stock":9,  "desc":"Our own signature creation — let us surprise you.",                                "sizes":{"Small":950,  "Medium":1350, "Premium":2000} }
+  {
+    "id": 1,
+    "name": "Rose Romance",
+    "cat": "anniversary",
+    "emoji": "🌹",
+    "imageUrl": "",
+    "base": 850,
+    "badge": "Bestseller",
+    "stock": 15,
+    "desc": "A timeless blend of premium red roses, symbolizing deep love and lasting affection.",
+    "sizes": {
+      "Small": 850,
+      "Medium": 1200,
+      "Premium": 1800
+    }
+  },
+  {
+    "id": 2,
+    "name": "Sunshine Burst",
+    "cat": "birthday",
+    "emoji": "🌻",
+    "imageUrl": "",
+    "base": 650,
+    "badge": null,
+    "stock": 20,
+    "desc": "A vibrant, cheerful mix of sunflowers and gerberas that radiates pure joy.",
+    "sizes": {
+      "Small": 650,
+      "Medium": 950,
+      "Premium": 1450
+    }
+  },
+  {
+    "id": 3,
+    "name": "Pure White Elegance",
+    "cat": "wedding",
+    "emoji": "🤍",
+    "imageUrl": "",
+    "base": 1500,
+    "badge": "Popular",
+    "stock": 8,
+    "desc": "Graceful white lilies, roses and baby's breath composed into a bridal masterpiece.",
+    "sizes": {
+      "Small": 1500,
+      "Medium": 2100,
+      "Premium": 3200
+    }
+  },
+  {
+    "id": 4,
+    "name": "Gentle Farewell",
+    "cat": "sympathy",
+    "emoji": "🪷",
+    "imageUrl": "",
+    "base": 900,
+    "badge": null,
+    "stock": 10,
+    "desc": "A serene arrangement of soft white and lavender blooms.",
+    "sizes": {
+      "Small": 900,
+      "Medium": 1250,
+      "Premium": 1750
+    }
+  },
+  {
+    "id": 5,
+    "name": "Pink Dream",
+    "cat": "birthday",
+    "emoji": "🌸",
+    "imageUrl": "",
+    "base": 750,
+    "badge": "New",
+    "stock": 18,
+    "desc": "Soft pink roses and carnations beautifully wrapped.",
+    "sizes": {
+      "Small": 750,
+      "Medium": 1100,
+      "Premium": 1600
+    }
+  },
+  {
+    "id": 6,
+    "name": "Wildflower Mix",
+    "cat": "custom",
+    "emoji": "💐",
+    "imageUrl": "",
+    "base": 700,
+    "badge": null,
+    "stock": 12,
+    "desc": "A hand-picked selection from our freshest seasonal arrivals.",
+    "sizes": {
+      "Small": 700,
+      "Medium": 1000,
+      "Premium": 1500
+    }
+  },
+  {
+    "id": 7,
+    "name": "Orchid Love",
+    "cat": "anniversary",
+    "emoji": "🌺",
+    "imageUrl": "",
+    "base": 1200,
+    "badge": "Luxury",
+    "stock": 6,
+    "desc": "Exotic orchids arranged with lush tropical greenery.",
+    "sizes": {
+      "Small": 1200,
+      "Medium": 1700,
+      "Premium": 2500
+    }
+  },
+  {
+    "id": 8,
+    "name": "Tulip Joy",
+    "cat": "birthday",
+    "emoji": "🌷",
+    "imageUrl": "",
+    "base": 600,
+    "badge": null,
+    "stock": 22,
+    "desc": "Fresh, colorful tulips arranged in a delightful spring-inspired bundle.",
+    "sizes": {
+      "Small": 600,
+      "Medium": 900,
+      "Premium": 1350
+    }
+  },
+  {
+    "id": 9,
+    "name": "Bridal Bliss",
+    "cat": "wedding",
+    "emoji": "👰",
+    "imageUrl": "",
+    "base": 2000,
+    "badge": "Premium",
+    "stock": 4,
+    "desc": "A grand bridal bouquet with cascading white roses and peonies.",
+    "sizes": {
+      "Small": 2000,
+      "Medium": 2800,
+      "Premium": 4200
+    }
+  },
+  {
+    "id": 10,
+    "name": "Daisy's Special",
+    "cat": "custom",
+    "emoji": "🌼",
+    "imageUrl": "",
+    "base": 950,
+    "badge": "Signature",
+    "stock": 9,
+    "desc": "Our own signature creation — let us surprise you.",
+    "sizes": {
+      "Small": 950,
+      "Medium": 1350,
+      "Premium": 2000
+    }
+  },
+  {
+    "id": 11,
+    "name": "Tulip",
+    "emoji": "🌸",
+    "cat": "custom",
+    "badge": "Bestseller",
+    "stock": 5,
+    "desc": "",
+    "imageUrl": "https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/images/1775984117938_1000177461.png",
+    "base": 500,
+    "sizes": {
+      "Small": 500,
+      "Medium": 1200,
+      "Premium": 2000
+    }
+  }
 ]
