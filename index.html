@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daisy — Knitted Bouquets Delivered</title>
+  <title>Daisy — Knitted Bouquets, Dharan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
@@ -24,13 +23,12 @@
       --r:          16px;
       --r-sm:       8px;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
-    /* ── NAV ────────────────────────────────── */
-    nav { position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 2rem; background: rgba(253,248,242,0.90); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(184,84,105,0.10); }
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 2rem; background: rgba(253,248,242,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(184,84,105,0.10); }
     .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 600; letter-spacing: 0.05em; color: var(--rose); cursor: pointer; display: flex; align-items: center; gap: 0.35rem; }
     .nav-links { display: flex; gap: 1.8rem; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--text); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: color 0.2s; }
@@ -39,29 +37,30 @@
     .cart-btn:hover { background: var(--rose-dark); transform: translateY(-1px); }
     .cart-count { background: #fff; color: var(--rose); border-radius: 50%; width: 19px; height: 19px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
 
-    /* ── BUTTONS ────────────────────────────── */
+    /* BUTTONS */
     .btn-primary { background: var(--rose); color: #fff; border: none; padding: 0.85rem 2rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.25s; display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none; }
     .btn-primary:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,84,105,0.30); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .btn-outline { background: transparent; color: var(--rose); border: 1.5px solid var(--rose); padding: 0.85rem 2rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.25s; display: inline-flex; align-items: center; gap: 0.45rem; }
     .btn-outline:hover { background: var(--rose-pale); transform: translateY(-2px); }
     .back-btn { background: none; border: none; color: var(--text-soft); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; cursor: pointer; padding: 0.4rem 0; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s; margin-bottom: 1.5rem; }
     .back-btn:hover { color: var(--rose); }
 
-    /* ── PAGE & ANIMATIONS ──────────────────── */
+    /* PAGE & ANIMATIONS */
     #app { min-height: calc(100vh - 65px); }
     .page { animation: fadeUp 0.35s ease both; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
     @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-18px) rotate(4deg);} }
     @keyframes pop { 0%{transform:scale(0.5);opacity:0;}80%{transform:scale(1.08);}100%{transform:scale(1);opacity:1;} }
-    @keyframes pulseWa { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35);}50%{box-shadow:0 4px 32px rgba(37,211,102,0.65);} }
-    @keyframes pulseIg { 0%,100%{box-shadow:0 4px 20px rgba(214,36,159,0.35);}50%{box-shadow:0 4px 32px rgba(214,36,159,0.65);} }
+    @keyframes spin { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
 
+    /* SECTION HELPERS */
     .section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 3rem; }
     .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rose); margin-bottom: 0.5rem; }
     .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; color: var(--dark); line-height: 1.2; }
 
-    /* ── HERO ───────────────────────────────── */
+    /* HERO */
     .hero { min-height: 88vh; display: flex; align-items: center; padding: 4rem 2rem; overflow: hidden; position: relative; background: linear-gradient(130deg, var(--beige) 0%, var(--cream) 55%, var(--rose-pale) 100%); }
     .hero-content { max-width: 580px; position: relative; z-index: 2; padding: 2rem; animation: fadeUp 0.8s ease both; }
     .hero-badge { display: inline-flex; align-items: center; gap: 0.35rem; background: var(--rose); color: #fff; padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.5rem; }
@@ -72,46 +71,46 @@
     .hero-visual { position: absolute; right: 0; top: 0; bottom: 0; width: 48%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .hero-circle { width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, var(--rose-soft), var(--rose-pale)); position: absolute; right: -90px; display: flex; align-items: center; justify-content: center; font-size: 11rem; filter: drop-shadow(0 24px 64px rgba(184,84,105,0.18)); animation: float 7s ease-in-out infinite; }
 
-    /* ── STRIP ─────────────────────── */
+    /* FEATURES STRIP */
     .features-strip { background: var(--dark); padding: 2.5rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 2rem; }
     .feat { text-align: center; color: var(--cream); }
     .feat-icon { font-size: 1.9rem; margin-bottom: 0.4rem; }
     .feat-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--rose-soft); margin-bottom: 0.2rem; }
     .feat-desc { font-size: 0.78rem; color: rgba(253,248,242,0.55); line-height: 1.5; }
 
-    /* ── CATEGORY PILLS ─────────────────────── */
+    /* CATEGORY PILLS */
     .cats { display: flex; gap: 0.65rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
     .cat-pill { display: flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.2rem; border-radius: 50px; background: #fff; border: 1.5px solid var(--beige); color: var(--text); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
     .cat-pill:hover, .cat-pill.active { background: var(--rose); color: #fff; border-color: var(--rose); transform: translateY(-2px); box-shadow: var(--shadow); }
 
-    /* ── PRODUCT GRID ───────────────────────── */
+    /* PRODUCT GRID */
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px,1fr)); gap: 1.4rem; }
     .pcard { background: #fff; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s; cursor: pointer; position: relative; }
     .pcard:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
     .pcard-img-wrap { overflow: hidden; position: relative; }
-    .pcard-img { width: 100%; aspect-ratio: 4/4.5; background: var(--beige); display: flex; align-items: center; justify-content: center; font-size: 5.5rem; transition: transform 0.4s; }
+    .pcard-img { width: 100%; aspect-ratio: 4/4.5; background: var(--beige); display: flex; align-items: center; justify-content: center; font-size: 5.5rem; transition: transform 0.4s; overflow: hidden; }
     .pcard-img img { width: 100%; height: 100%; object-fit: cover; }
     .pcard:hover .pcard-img { transform: scale(1.06); }
-    .pcard-badge { position: absolute; top: 11px; left: 11px; background: var(--rose); color: #fff; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 50px; z-index: 2; }
+    .pcard-badge { position: absolute; top: 11px; left: 11px; background: var(--rose); color: #fff; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 50px; }
+    .pcard-oos { position: absolute; top: 11px; right: 11px; background: #EF4444; color: #fff; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 50px; }
     .pcard-body { padding: 1.15rem; }
     .pcard-cat { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose); margin-bottom: 0.25rem; }
     .pcard-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--dark); margin-bottom: 0.35rem; line-height: 1.2; }
-    .pcard-price { font-size: 1.1rem; font-weight: 600; color: var(--rose); margin-bottom: 0.75rem; }
+    .pcard-price { font-size: 1rem; font-weight: 600; color: var(--rose); margin-bottom: 0.75rem; }
     .pcard-btn { width: 100%; background: var(--rose-pale); color: var(--rose); border: none; padding: 0.6rem; border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.03em; }
     .pcard-btn:hover { background: var(--rose); color: #fff; }
 
+    /* CTA BANNER */
     .cta-banner { background: linear-gradient(135deg, var(--rose) 0%, #7A2940 100%); padding: 4rem 2rem; text-align: center; }
 
-    /* ── PRODUCT DETAIL ─────────────────────── */
+    /* PRODUCT DETAIL */
     .pdetail { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 3rem 2rem 5rem; max-width: 1100px; margin: 0 auto; }
     .pdetail-img { border-radius: var(--r); background: var(--beige); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 10rem; position: sticky; top: 85px; overflow: hidden; }
     .pdetail-img img { width: 100%; height: 100%; object-fit: cover; }
     .pdetail-info h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; color: var(--dark); margin-bottom: 0.4rem; line-height: 1.15; }
     .pdetail-price { font-size: 1.55rem; font-weight: 600; color: var(--rose); margin-bottom: 1.4rem; }
     .pdetail-desc { color: var(--text-soft); line-height: 1.75; font-size: 0.93rem; margin-bottom: 1.8rem; }
-
     .sel-label { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-soft); margin-bottom: 0.55rem; }
-    
     .addon-wrap { margin-bottom: 1.6rem; }
     .addon-opts { display: flex; flex-direction: column; gap: 0.45rem; }
     .addon-opt { display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 0.9rem; border: 1.5px solid var(--beige); border-radius: var(--r-sm); cursor: pointer; background: #fff; transition: all 0.2s; }
@@ -121,7 +120,7 @@
     .addon-name { flex: 1; font-size: 0.86rem; font-weight: 500; }
     .addon-price { font-size: 0.82rem; color: var(--rose); font-weight: 600; }
 
-    /* ── CART ───────────────────────────────── */
+    /* CART */
     .cart-page { max-width: 780px; margin: 0 auto; padding: 3.5rem 2rem; }
     .cart-item { display: grid; grid-template-columns: 76px 1fr auto; gap: 1.1rem; align-items: center; padding: 1.1rem; background: #fff; border-radius: var(--r); margin-bottom: 0.9rem; box-shadow: var(--shadow); }
     .cart-item-img { width: 76px; height: 76px; border-radius: var(--r-sm); background: var(--beige); display: flex; align-items: center; justify-content: center; font-size: 2.3rem; overflow: hidden; }
@@ -134,28 +133,24 @@
     .cart-summary { background: #fff; border-radius: var(--r); padding: 1.4rem; box-shadow: var(--shadow); margin-top: 1.25rem; }
     .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; }
 
-    /* ── CHECKOUT ───────────────────────────── */
+    /* CHECKOUT */
     .checkout-page { max-width: 620px; margin: 0 auto; padding: 3.5rem 2rem; }
     .form-group { margin-bottom: 1.1rem; }
     .form-label { display: block; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); margin-bottom: 0.38rem; }
     .form-input, .form-select, .form-textarea { width: 100%; padding: 0.8rem 0.95rem; border: 1.5px solid var(--beige); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: var(--text); background: #fff; outline: none; transition: border-color 0.2s; }
     .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--rose); }
     .form-textarea { resize: vertical; min-height: 76px; }
-
     .pay-opts { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.4rem; }
     .pay-opt { display: flex; align-items: center; gap: 0.9rem; padding: 0.85rem 1.1rem; border: 1.5px solid var(--beige); border-radius: var(--r-sm); cursor: pointer; background: #fff; transition: all 0.2s; }
     .pay-opt:hover, .pay-opt.sel { border-color: var(--rose); background: var(--rose-pale); }
     .pay-opt input { accent-color: var(--rose); }
     .pay-name { font-weight: 600; font-size: 0.92rem; }
     .pay-desc { font-size: 0.74rem; color: var(--text-soft); }
-    
-    .esewa-instructions { display: none; margin-top: 0.8rem; padding: 1rem; background: #fdfdfd; border: 1px dashed var(--rose); border-radius: var(--r-sm); font-size: 0.85rem; color: var(--text); }
-    
     .order-summary-box { background: var(--beige); border-radius: var(--r-sm); padding: 1.15rem; margin-bottom: 1.4rem; }
     .sum-row { display: flex; justify-content: space-between; font-size: 0.86rem; margin-bottom: 0.4rem; }
     .sum-total { font-size: 1rem; font-weight: 700; }
 
-    /* ── CONFIRM ────────────────────────────── */
+    /* CONFIRM */
     .confirm-page { text-align: center; padding: 5rem 2rem; max-width: 580px; margin: 0 auto; }
     .confirm-icon { font-size: 5rem; margin-bottom: 1.4rem; animation: pop 0.5s ease both; }
     .confirm-title { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; color: var(--dark); margin-bottom: 0.8rem; }
@@ -165,7 +160,7 @@
     .confirm-row strong { min-width: 90px; color: var(--dark); }
     .confirm-row span { color: var(--text-soft); }
 
-    /* ── ABOUT / CONTACT ────────────────────── */
+    /* ABOUT / CONTACT */
     .about-hero { background: linear-gradient(135deg, var(--rose-pale), var(--beige)); padding: 5rem 2rem; text-align: center; }
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1.25rem; }
     .ccard { background: #fff; border-radius: var(--r); padding: 2rem; text-align: center; box-shadow: var(--shadow); }
@@ -173,13 +168,13 @@
     .ccard-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--dark); margin-bottom: 0.4rem; }
     .ccard-val { color: var(--text-soft); font-size: 0.88rem; line-height: 1.65; }
 
-    /* ── EMPTY STATE ────────────────────────── */
+    /* EMPTY STATE */
     .empty { text-align: center; padding: 4rem 2rem; color: var(--text-soft); }
     .empty-icon { font-size: 3.5rem; margin-bottom: 0.9rem; }
     .empty h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; color: var(--dark); margin-bottom: 0.4rem; }
     .empty p { font-size: 0.88rem; }
 
-    /* ── FOOTER ─────────────────────────────── */
+    /* FOOTER */
     footer { background: var(--dark); color: rgba(253,248,242,0.65); padding: 3rem 2rem; text-align: center; }
     .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: var(--rose-soft); margin-bottom: 0.6rem; }
     .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0; }
@@ -188,13 +183,16 @@
     .footer-info { font-size: 0.8rem; margin-top: 0.75rem; }
     .footer-copy { font-size: 0.72rem; opacity: 0.35; margin-top: 0.75rem; }
 
-    /* ── SOCIAL FABS ───────────────────────── */
-    .fab-container { position: fixed; bottom: 1.5rem; right: 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; z-index: 999; }
-    .s-fab { width: 50px; height: 50px; border-radius: 50%; color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s; }
-    .s-fab:hover { transform: scale(1.1) translateY(-2px); }
-    .fab-wa { background: #25D366; box-shadow: 0 4px 20px rgba(37,211,102,0.35); animation: pulseWa 3s ease-in-out infinite; }
-    .fab-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); box-shadow: 0 4px 20px rgba(214,36,159,0.35); animation: pulseIg 3s ease-in-out infinite 1.5s; }
+    /* FAB STACK (WhatsApp + Instagram circles) */
+    .fab-stack { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: 0.65rem; align-items: center; }
+    .fab-btn { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.25s; text-decoration: none; flex-shrink: 0; }
+    .fab-wa { background: #25D366; box-shadow: 0 4px 20px rgba(37,211,102,0.45); animation: pulseWa 3s ease-in-out infinite; }
+    .fab-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow: 0 4px 20px rgba(214,36,159,0.35); }
+    .fab-btn:hover { transform: scale(1.12) translateY(-2px); }
+    .fab-btn svg { width: 24px; height: 24px; }
+    @keyframes pulseWa { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.35);}50%{box-shadow:0 4px 32px rgba(37,211,102,0.65);} }
 
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 0.85rem 1rem; }
       .nav-links { display: none; }
@@ -208,6 +206,7 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="nav-logo" onclick="navigate('home')">🌸 Daisy</div>
   <ul class="nav-links">
@@ -215,17 +214,20 @@
     <li><a onclick="navigate('shop')">Shop</a></li>
     <li><a onclick="navigate('about')">About</a></li>
     <li><a onclick="navigate('contact')">Contact</a></li>
+    <li><a href="admin.html">Admin</a></li>
   </ul>
   <button class="cart-btn" onclick="navigate('cart')">
     🛒 Cart <span class="cart-count" id="cartCount">0</span>
   </button>
 </nav>
 
+<!-- APP ROOT -->
 <div id="app"></div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">🌸 Daisy</div>
-  <p style="font-size:0.85rem;">Everlasting Knitted Bouquets, Crafted With Love</p>
+  <p style="font-size:0.85rem;">Knitted Bouquets, Crafted With Love</p>
   <div class="footer-links">
     <a onclick="navigate('home')">Home</a>
     <a onclick="navigate('shop')">Shop</a>
@@ -233,30 +235,42 @@
     <a onclick="navigate('contact')">Contact</a>
   </div>
   <p class="footer-info">
-    📍 <a href="https://maps.google.com/?q=Near+R78J+G5X,+Chatara+Line,+Dharan+56700" target="_blank" style="color:inherit;text-decoration:none;">Near R78J+G5X, Chatara Line, Dharan 56700</a> &nbsp;|&nbsp; 📞 9706348791
+    <a href="https://maps.google.com/?q=R78J%2BG5X+Chatara+Line+Dharan+56700+Nepal" target="_blank" style="color:rgba(253,248,242,0.65);text-decoration:none;">
+      📍 Near R78J+G5X, Chatara Line, Dharan 56700
+    </a>
+    &nbsp;|&nbsp;
+    <a href="tel:9706348791" style="color:rgba(253,248,242,0.65);text-decoration:none;">📞 9706348791</a>
   </p>
   <p class="footer-copy">© 2025 Daisy Bouquets. All rights reserved.</p>
 </footer>
 
-<div class="fab-container">
-  <!-- WhatsApp -->
-  <button class="s-fab fab-wa" onclick="openWhatsApp()" aria-label="WhatsApp">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </button>
-  <!-- Instagram -->
-  <button class="s-fab fab-ig" onclick="window.open('https://www.instagram.com/daisynextdoor06?igsh=MWdqenlyaDgxdTU0aw==','_blank')" aria-label="Instagram">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+<!-- FAB STACK: WhatsApp + Instagram -->
+<div class="fab-stack">
+  <a class="fab-btn fab-ig" href="https://www.instagram.com/daisynextdoor06?igsh=MWdqenlyaDgxdTU0aw==" target="_blank" title="Follow us on Instagram">
+    <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  </a>
+  <button class="fab-btn fab-wa" onclick="openWhatsApp()" title="Order on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </button>
 </div>
 
 <script>
 // ════════════════════════════════════════════════
-//  GITHUB CONFIG
+//  CONFIG
 // ════════════════════════════════════════════════
-const GITHUB_RAW = 'https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/data/products.json';
+const GITHUB_RAW          = 'https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/data/products.json';
+const GITHUB_RAW_SETTINGS = 'https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/data/settings.json';
 
 let PRODUCTS = [];
-let SETTINGS = { esewaNumber: '', deliveryFee: 100 };
+const DEFAULT_PRODUCTS = []; // Admin adds real products — no fake defaults
+
+// Load settings (delivery fee, eSewa phone) from localStorage
+function loadSettings() {
+  try { return JSON.parse(localStorage.getItem('daisy_settings') || '{}'); } catch { return {}; }
+}
+let SETTINGS = loadSettings();
+function getDeliveryFee()    { return Number(SETTINGS.deliveryFee  ?? 100); }
+function getFreeDeliveryAt() { return Number(SETTINGS.freeDeliveryAt ?? 1500); }
 
 const ADDONS = [
   { id:'choc', name:'Chocolate Box', emoji:'🍫', price:200 },
@@ -265,7 +279,7 @@ const ADDONS = [
 ];
 
 const CATS = [
-  { id:'all',         name:'All Bouquets', emoji:'💐' },
+  { id:'all',         name:'All',         emoji:'💐' },
   { id:'birthday',    name:'Birthday',    emoji:'🎂' },
   { id:'wedding',     name:'Wedding',     emoji:'💍' },
   { id:'anniversary', name:'Anniversary', emoji:'❤️' },
@@ -273,55 +287,76 @@ const CATS = [
   { id:'custom',      name:'Custom',      emoji:'✨' },
 ];
 
-let page           = 'home';
-let currentProdId  = null;
-let currentOrder   = null;
-let shopCat        = 'all';
+// ════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════
+let page          = 'home';
+let currentProdId = null;
+let currentOrder  = null;
+let shopCat       = 'all';
+let selectedAddons = [];
 
 let cart   = JSON.parse(localStorage.getItem('daisy_cart')   || '[]');
 let orders = JSON.parse(localStorage.getItem('daisy_orders') || '[]');
 
-// History API for back button support
-window.addEventListener('popstate', (e) => {
-  if (e.state && e.state.page) {
-    page = e.state.page;
-    currentProdId = e.state.currentProdId || null;
-    currentOrder = e.state.currentOrder || null;
-    render();
-  } else {
-    page = 'home';
-    render();
-  }
-});
-
-function navigate(p, data, pushState = true) {
+// ════════════════════════════════════════════════
+//  NAVIGATE — with History API (back button fix)
+// ════════════════════════════════════════════════
+function navigate(p, data, fromPop=false) {
   page = p;
-  if (p === 'product' && data != null) { currentProdId = data; }
+  if (p === 'product' && data != null) { currentProdId = data; selectedAddons = []; }
   if (p === 'confirm' && data != null) { currentOrder = data; }
-  
-  if (pushState) {
-    history.pushState({ page, currentProdId, currentOrder }, '', '?p=' + p);
+
+  if (!fromPop) {
+    const state = { page: p, prodId: currentProdId, shopCat };
+    history.pushState(state, '', '#' + p + (p==='product' && data ? '-'+data : ''));
   }
-  
+
   render();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function saveCart()   { localStorage.setItem('daisy_cart',   JSON.stringify(cart)); syncCartCount(); }
+window.addEventListener('popstate', e => {
+  if (e.state && e.state.page) {
+    const s = e.state;
+    page = s.page;
+    if (s.prodId)   currentProdId = s.prodId;
+    if (s.shopCat)  shopCat       = s.shopCat;
+    render();
+    window.scrollTo({ top: 0 });
+  }
+});
+
+// ════════════════════════════════════════════════
+//  CART HELPERS
+// ════════════════════════════════════════════════
+function saveCart()   { localStorage.setItem('daisy_cart',   JSON.stringify(cart));   syncCartCount(); }
 function saveOrders() { localStorage.setItem('daisy_orders', JSON.stringify(orders)); }
-function syncCartCount() { const el = document.getElementById('cartCount'); if (el) el.textContent = cart.length; }
-function cartTotal()    { return cart.reduce((s,i)=>s+i.price,0); }
-function orderTotal()   { return cartTotal() + SETTINGS.deliveryFee; }
+
+function syncCartCount() {
+  const el = document.getElementById('cartCount');
+  if (el) el.textContent = cart.length;
+}
+
+function getPrice(p) { return p.price || p.base || (p.sizes && (p.sizes.Small || p.sizes.Standard)) || 0; }
+
+function cartTotal()   { return cart.reduce((s,i)=>s+i.price,0); }
+function deliveryFee() { return cartTotal() >= getFreeDeliveryAt() ? 0 : getDeliveryFee(); }
+function orderTotal()  { return cartTotal() + deliveryFee(); }
 
 function addToCart(prodId, addonIds) {
   const p = PRODUCTS.find(x=>x.id===prodId);
+  if (!p) return;
+  const base = getPrice(p);
   const ads = ADDONS.filter(a=>addonIds.includes(a.id));
   const addonCost = ads.reduce((s,a)=>s+a.price,0);
-  const basePrice = p.price || p.base || 0;
   cart.push({
     uid: Date.now() + Math.random(),
-    prodId, name: p.name, emoji: p.emoji, imageUrl: p.imageUrl,
-    price: basePrice + addonCost,
+    prodId,
+    name: p.name,
+    emoji: p.emoji,
+    imageUrl: p.imageUrl || '',
+    price: base + addonCost,
     addons: ads.map(a=>a.name),
   });
   saveCart();
@@ -334,19 +369,28 @@ function removeFromCart(uid) {
   render();
 }
 
+// ════════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════════
 function toast(msg) {
   const t = document.createElement('div');
-  t.style.cssText = 'position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);background:#1C1212;color:#FDF8F2;padding:0.7rem 1.4rem;border-radius:50px;font-size:0.84rem;font-weight:500;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.2);animation:fadeUp 0.3s ease;white-space:nowrap;';
+  t.style.cssText = 'position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);background:#1C1212;color:#FDF8F2;padding:0.7rem 1.4rem;border-radius:50px;font-size:0.84rem;font-weight:500;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.2);animation:fadeUp 0.3s ease;white-space:nowrap;';
   t.textContent = msg;
   document.body.appendChild(t);
   setTimeout(()=>t.remove(), 2400);
 }
 
+// ════════════════════════════════════════════════
+//  WHATSAPP
+// ════════════════════════════════════════════════
 function openWhatsApp() {
-  const msg = encodeURIComponent("Hello Daisy! 🌸 I'd like to place a custom order.");
+  const msg = encodeURIComponent("Hello Daisy! 🌸 I'd like to order a knitted bouquet.");
   window.open(`https://wa.me/9779706348791?text=${msg}`, '_blank');
 }
 
+// ════════════════════════════════════════════════
+//  RENDER ROUTER
+// ════════════════════════════════════════════════
 function render() {
   const app = document.getElementById('app');
   switch (page) {
@@ -363,43 +407,54 @@ function render() {
   syncCartCount();
 }
 
-// ── HOME ───────────────────────────────────────
+// ════════════════════════════════════════════════
+//  HOME
+// ════════════════════════════════════════════════
 function homeHTML() {
+  // Use first 4 products safely (no crash if fewer)
   const featured = PRODUCTS.slice(0, 4);
   return `
   <div class="page">
     <section class="hero">
       <div class="hero-content">
-        <div class="hero-badge">✨ Everlasting Love</div>
-        <h1>Knitted Creations That<br><em>Say It All</em></h1>
-        <p>Everlasting knitted bouquets hand-crafted with love and care — because every emotion deserves a creation worthy of the moment.</p>
+        <div class="hero-badge">🧶 Handcrafted Knitted Bouquets</div>
+        <h1>Bouquets That<br><em>Say It All</em></h1>
+        <p>Beautifully knitted bouquets made to order — a lasting keepsake that never fades, crafted with care for every special moment.</p>
         <div class="hero-actions">
           <button class="btn-primary" onclick="navigate('shop')">Shop Bouquets →</button>
           <button class="btn-outline" onclick="openWhatsApp()">💬 Custom Order</button>
         </div>
       </div>
-      <div class="hero-visual"><div class="hero-circle">🧶</div></div>
+      <div class="hero-visual"><div class="hero-circle">💐</div></div>
     </section>
 
     <div class="features-strip">
-      ${[['✨','Everlasting Love','Beautiful yarn creations that never fade'],['🎨','Made to Order','Hand-knitted just for you'],['🧶','Premium Yarn','Soft, vibrant, and durable'],['🛵','Local Delivery','Fast delivery within Dharan']].map(([ic,t,d])=>`
+      ${[['🧶','Knitted with Love','Each bouquet hand-crafted stitch by stitch'],['⏳','Made to Order','Crafted fresh for you, not mass-produced'],['🎨','Custom Designs','Pick colours, styles, and occasion'],['🛵','Home Delivery','We deliver to your door in Dharan']].map(([ic,t,d])=>`
         <div class="feat"><div class="feat-icon">${ic}</div><div class="feat-title">${t}</div><div class="feat-desc">${d}</div></div>
       `).join('')}
     </div>
 
+    ${featured.length > 0 ? `
     <div class="section">
       <div class="section-header">
-        <div class="section-label">Our Creations</div>
+        <div class="section-label">Our Collection</div>
         <h2 class="section-title">Featured Bouquets</h2>
       </div>
-      ${featured.length > 0 
-        ? `<div class="product-grid">${featured.map(pcardHTML).join('')}</div>`
-        : `<div class="empty"><p>Beautiful creations coming soon!</p></div>`
-      }
+      <div class="product-grid">${featured.map(pcardHTML).join('')}</div>
       <div style="text-align:center;margin-top:3rem;">
         <button class="btn-outline" onclick="navigate('shop')">View All Bouquets →</button>
       </div>
-    </div>
+    </div>` : `
+    <div class="section">
+      <div class="section-header">
+        <div class="section-label">Coming Soon</div>
+        <h2 class="section-title">New Bouquets Arriving</h2>
+        <p style="color:var(--text-soft);margin-top:0.65rem;">Our collection is being prepared. Message us on WhatsApp to place a custom order now!</p>
+      </div>
+      <div style="text-align:center;margin-top:2rem;">
+        <button class="btn-primary" onclick="openWhatsApp()">💬 Order on WhatsApp</button>
+      </div>
+    </div>`}
 
     <div style="background:var(--beige);padding:4rem 2rem;">
       <div class="section-header">
@@ -414,14 +469,16 @@ function homeHTML() {
     </div>
 
     <div class="cta-banner">
-      <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.4rem;">Limited Time Offer</p>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.1rem;color:#fff;margin-bottom:1rem;">Free Greeting Card with Every Order This Week 💌</h2>
-      <button class="btn-outline" style="border-color:#fff;color:#fff;" onclick="navigate('shop')">Grab the Offer</button>
+      <p style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.4rem;">Thoughtful Gift Idea</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.1rem;color:#fff;margin-bottom:1rem;">Knitted Bouquets Last Forever — Unlike Real Flowers 🌸</h2>
+      <button class="btn-outline" style="border-color:#fff;color:#fff;" onclick="navigate('shop')">Shop Now</button>
     </div>
   </div>`;
 }
 
-// ── SHOP ───────────────────────────────────────
+// ════════════════════════════════════════════════
+//  SHOP
+// ════════════════════════════════════════════════
 function shopHTML() {
   const list = shopCat==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===shopCat);
   return `
@@ -435,38 +492,49 @@ function shopHTML() {
         ${CATS.map(c=>`<button class="cat-pill ${shopCat===c.id?'active':''}" onclick="shopCat='${c.id}';navigate('shop')">${c.emoji} ${c.name}</button>`).join('')}
       </div>
       ${list.length===0
-        ? `<div class="empty"><div class="empty-icon">🧶</div><h3>No bouquets here</h3><p>Try another category or check back soon.</p></div>`
+        ? `<div class="empty"><div class="empty-icon">🧶</div><h3>No bouquets yet</h3><p>Check back soon or message us for a custom order.</p><button class="btn-primary" style="margin-top:1.3rem;" onclick="openWhatsApp()">💬 Custom Order</button></div>`
         : `<div class="product-grid">${list.map(pcardHTML).join('')}</div>`
       }
     </div>
   </div>`;
 }
 
+// ════════════════════════════════════════════════
+//  PRODUCT CARD
+// ════════════════════════════════════════════════
 function pcardHTML(p) {
-  const thumb = p.imageUrl ? `<img src="${p.imageUrl}" alt="${p.name}">` : p.emoji;
-  const price = p.price || p.base || 0;
+  const price = getPrice(p);
+  const isOOS = p.stock !== undefined && Number(p.stock) <= 0;
+  const imgInner = p.imageUrl
+    ? `<img src="${p.imageUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">${isOOS?'':''}<span style="display:none;font-size:5.5rem;">${p.emoji}</span>`
+    : p.emoji;
   return `
   <div class="pcard" onclick="navigate('product',${p.id})">
     <div class="pcard-img-wrap">
-      <div class="pcard-img">${thumb}</div>
+      <div class="pcard-img">${p.imageUrl ? `<img src="${p.imageUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.outerHTML='<span style=font-size:5.5rem>${p.emoji}</span>'">` : p.emoji}</div>
       ${p.badge ? `<div class="pcard-badge">${p.badge}</div>` : ''}
+      ${isOOS ? `<div class="pcard-oos">Out of Stock</div>` : ''}
     </div>
     <div class="pcard-body">
       <div class="pcard-cat">${p.cat}</div>
       <div class="pcard-name">${p.name}</div>
       <div class="pcard-price">Rs. ${price.toLocaleString()}</div>
-      <button class="pcard-btn" onclick="event.stopPropagation();navigate('product',${p.id})">View & Order</button>
+      <button class="pcard-btn" onclick="event.stopPropagation();navigate('product',${p.id})">${isOOS ? 'View Details' : 'View & Order'}</button>
     </div>
   </div>`;
 }
 
-// ── PRODUCT DETAIL ─────────────────────────────
+// ════════════════════════════════════════════════
+//  PRODUCT DETAIL
+// ════════════════════════════════════════════════
 function productHTML() {
   const p = PRODUCTS.find(x=>x.id===currentProdId);
-  if (!p) return '<div class="empty"><div class="empty-icon">🌾</div><h3>Product not found</h3></div>';
-  
-  const thumb = p.imageUrl ? `<img src="${p.imageUrl}" alt="${p.name}">` : p.emoji;
-  const price = p.price || p.base || 0;
+  if (!p) return '<div class="empty"><div class="empty-icon">🌾</div><h3>Bouquet not found</h3><button class="btn-primary" style="margin-top:1.3rem;" onclick="navigate(\'shop\')">Back to Shop</button></div>';
+  const price = getPrice(p);
+  const isOOS = p.stock !== undefined && Number(p.stock) <= 0;
+  const imgContent = p.imageUrl
+    ? `<img src="${p.imageUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r);" onerror="this.outerHTML='<span style=font-size:10rem>${p.emoji}</span>'">`
+    : `<span style="font-size:10rem;">${p.emoji}</span>`;
 
   return `
   <div class="page">
@@ -474,12 +542,15 @@ function productHTML() {
       <button class="back-btn" onclick="navigate('shop')">← Back to Shop</button>
     </div>
     <div class="pdetail">
-      <div class="pdetail-img">${thumb}</div>
+      <div class="pdetail-img">${imgContent}</div>
       <div class="pdetail-info">
         <div class="pcard-cat" style="margin-bottom:0.4rem;">${p.cat}</div>
         <h1>${p.name}</h1>
+        ${p.badge ? `<div style="margin-bottom:0.6rem;"><span style="background:var(--rose);color:#fff;font-size:0.7rem;font-weight:700;padding:0.2rem 0.7rem;border-radius:50px;letter-spacing:0.06em;text-transform:uppercase;">${p.badge}</span></div>` : ''}
         <div class="pdetail-price" id="detailPrice">Rs. ${price.toLocaleString()}</div>
-        <p class="pdetail-desc">${p.desc}</p>
+        <p class="pdetail-desc">${p.desc || 'A beautifully hand-knitted bouquet crafted with premium yarn and care.'}</p>
+
+        ${isOOS ? `<div style="background:#FEE2E2;color:#DC2626;border-radius:var(--r-sm);padding:0.75rem 1rem;font-size:0.85rem;font-weight:600;margin-bottom:1.4rem;">⚠️ Currently out of stock — message us on WhatsApp to pre-order.</div>` : ''}
 
         <div class="addon-wrap">
           <div class="sel-label">Add-ons (Optional)</div>
@@ -495,8 +566,11 @@ function productHTML() {
           </div>
         </div>
 
-        <button class="btn-primary" style="width:100%;justify-content:center;padding:0.95rem;margin-bottom:0.65rem;" onclick="doAddToCart(${p.id})">Add to Cart 🛒</button>
-        <button class="btn-outline"  style="width:100%;justify-content:center;padding:0.95rem;" onclick="openWhatsApp()">💬 Order via WhatsApp</button>
+        ${!isOOS
+          ? `<button class="btn-primary" style="width:100%;justify-content:center;padding:0.95rem;margin-bottom:0.65rem;" onclick="doAddToCart(${p.id})">Add to Cart 🛒</button>`
+          : `<button class="btn-primary" disabled style="width:100%;justify-content:center;padding:0.95rem;margin-bottom:0.65rem;">Out of Stock</button>`
+        }
+        <button class="btn-outline" style="width:100%;justify-content:center;padding:0.95rem;" onclick="openWhatsApp()">💬 Order via WhatsApp</button>
       </div>
     </div>
   </div>`;
@@ -512,7 +586,7 @@ function onAddonChange(id) {
 function refreshDetailPrice() {
   const p = PRODUCTS.find(x=>x.id===currentProdId);
   if (!p) return;
-  const base = p.price || p.base || 0;
+  const base = getPrice(p);
   const extra = ADDONS.filter(a=>{
     const cb = document.querySelector(`input[value="${a.id}"]`);
     return cb && cb.checked;
@@ -529,54 +603,84 @@ function doAddToCart(id) {
   addToCart(id, addonIds);
 }
 
-// ── CART ───────────────────────────────────────
+// ════════════════════════════════════════════════
+//  CART
+// ════════════════════════════════════════════════
 function cartHTML() {
   if (!cart.length) return `
     <div class="page cart-page">
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--dark);margin-bottom:2rem;">Your Cart</h2>
       <div class="empty"><div class="empty-icon">🛒</div><h3>Your cart is empty</h3><p>Discover our beautiful knitted bouquets</p><button class="btn-primary" style="margin-top:1.3rem;" onclick="navigate('shop')">Shop Now</button></div>
     </div>`;
-  
   return `
   <div class="page cart-page">
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--dark);margin-bottom:1.5rem;">Your Cart (${cart.length})</h2>
-    ${cart.map(item => {
-      const thumb = item.imageUrl ? `<img src="${item.imageUrl}">` : item.emoji;
-      return `
+    ${cart.map(item=>`
       <div class="cart-item">
-        <div class="cart-item-img">${thumb}</div>
+        <div class="cart-item-img">
+          ${item.imageUrl
+            ? `<img src="${item.imageUrl}" onerror="this.outerHTML='<span style=font-size:2.3rem>${item.emoji}</span>'">`
+            : item.emoji}
+        </div>
         <div>
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-sub">${item.addons.length ? 'Add-ons: '+item.addons.join(', ') : ''}</div>
+          ${item.addons.length ? `<div class="cart-item-sub">+ ${item.addons.join(', ')}</div>` : ''}
         </div>
         <div>
           <div class="cart-item-price">Rs. ${item.price.toLocaleString()}</div>
           <button class="cart-remove" onclick="removeFromCart(${item.uid})">✕ Remove</button>
         </div>
       </div>
-      `
-    }).join('')}
+    `).join('')}
     <div class="cart-summary">
-      <div class="cart-total-row"><span>Total</span><span style="color:var(--rose);">Rs. ${(cartTotal() + SETTINGS.deliveryFee).toLocaleString()}</span></div>
-      <p style="font-size:0.8rem;color:var(--text-soft);margin-bottom:1rem;">Includes standard delivery fee of Rs. ${SETTINGS.deliveryFee} 🛵</p>
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span>Rs. ${cartTotal().toLocaleString()}</span>
+      </div>
+      ${deliveryFee()===0
+        ? `<p style="font-size:0.8rem;color:var(--sage);font-weight:600;margin-bottom:1rem;">✓ Free delivery!</p>`
+        : `<div style="display:flex;justify-content:space-between;font-size:0.86rem;margin-bottom:0.5rem;"><span>Delivery</span><span>Rs. ${getDeliveryFee()}</span></div><p style="font-size:0.8rem;color:var(--text-soft);margin-bottom:1rem;">Add Rs. ${(getFreeDeliveryAt()-cartTotal()).toLocaleString()} more for free delivery 🛵</p>`
+      }
+      <div style="display:flex;justify-content:space-between;font-size:1.1rem;font-weight:700;margin-bottom:1rem;">
+        <span>Total</span>
+        <span style="color:var(--rose);">Rs. ${orderTotal().toLocaleString()}</span>
+      </div>
       <button class="btn-primary" style="width:100%;justify-content:center;padding:0.95rem;" onclick="navigate('checkout')">Proceed to Checkout →</button>
     </div>
   </div>`;
 }
 
-// ── CHECKOUT ───────────────────────────────────
+// ════════════════════════════════════════════════
+//  CHECKOUT
+// ════════════════════════════════════════════════
 function checkoutHTML() {
   const today = new Date().toISOString().split('T')[0];
+  const ep = SETTINGS.esewaPhone || '';
   return `
   <div class="page checkout-page">
     <button class="back-btn" onclick="navigate('cart')">← Back to Cart</button>
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--dark);margin-bottom:1.6rem;">Checkout</h2>
 
-    <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="co-name" type="text" placeholder="Your full name"></div>
-    <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" id="co-phone" type="tel" placeholder="98XXXXXXXX"></div>
-    <div class="form-group"><label class="form-label">Delivery Address *</label><textarea class="form-textarea" id="co-addr" placeholder="Street, area, landmark..."></textarea></div>
-    <div class="form-group"><label class="form-label">Delivery Date *</label><input class="form-input" id="co-date" type="date" min="${today}"></div>
-    <div class="form-group"><label class="form-label">Card Message (Optional)</label><textarea class="form-textarea" id="co-msg" placeholder="Write a message for the greeting card..."></textarea></div>
+    <div class="form-group">
+      <label class="form-label">Full Name *</label>
+      <input class="form-input" id="co-name" type="text" placeholder="Your full name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number *</label>
+      <input class="form-input" id="co-phone" type="tel" placeholder="98XXXXXXXX">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Delivery Address *</label>
+      <textarea class="form-textarea" id="co-addr" placeholder="Street, area, landmark..."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Delivery Date *</label>
+      <input class="form-input" id="co-date" type="date" min="${today}">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Card Message (Optional)</label>
+      <textarea class="form-textarea" id="co-msg" placeholder="Write a message for the greeting card..."></textarea>
+    </div>
 
     <div class="form-group">
       <label class="form-label">Payment Method</label>
@@ -585,21 +689,24 @@ function checkoutHTML() {
           <input type="radio" name="pay" value="cod" checked onchange="selPay('pop-cod')">
           <div><div class="pay-name">💵 Cash on Delivery</div><div class="pay-desc">Pay when your bouquet arrives</div></div>
         </label>
-        <label class="pay-opt" id="pop-digi">
-          <input type="radio" name="pay" value="esewa" onchange="selPay('pop-digi')">
-          <div><div class="pay-name">📱 eSewa</div><div class="pay-desc">Pay to ${SETTINGS.esewaNumber || '(Number missing)'}</div></div>
-        </label>
+        ${ep ? `
+        <label class="pay-opt" id="pop-esewa">
+          <input type="radio" name="pay" value="esewa" onchange="selPay('pop-esewa')">
+          <div><div class="pay-name">💚 eSewa</div><div class="pay-desc">Pay via eSewa to ${ep}</div></div>
+        </label>` : ''}
       </div>
-      <div id="esewaInfo" class="esewa-instructions">
-        <strong>eSewa Transfer Details:</strong><br>
-        Please send <strong>Rs. ${orderTotal().toLocaleString()}</strong> to <strong style="color:var(--rose);font-size:1.1rem;">${SETTINGS.esewaNumber}</strong>.<br>
-        <em>We will call you to verify the transaction once the order is placed.</em>
-      </div>
+      ${ep ? `
+      <div id="esewa-panel" style="display:none;margin-top:1rem;background:var(--beige);border-radius:var(--r-sm);padding:1.25rem;text-align:center;">
+        <p style="font-size:0.88rem;margin-bottom:0.75rem;">Scan QR or open eSewa and send to <strong>${ep}</strong></p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${ep}&bgcolor=ffffff&color=1C1212" style="border-radius:8px;width:160px;height:160px;display:block;margin:0 auto 0.75rem;">
+        <a href="https://esewa.com.np" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:#60BB46;color:#fff;padding:0.55rem 1.2rem;border-radius:50px;font-size:0.82rem;font-weight:600;text-decoration:none;">Open eSewa App →</a>
+        <p style="font-size:0.74rem;color:var(--text-soft);margin-top:0.75rem;">After payment, take a screenshot and send it to our WhatsApp.</p>
+      </div>` : ''}
     </div>
 
     <div class="order-summary-box">
       <div class="sum-row"><span>Items (${cart.length})</span><span>Rs. ${cartTotal().toLocaleString()}</span></div>
-      <div class="sum-row"><span>Delivery</span><span>Rs. ${SETTINGS.deliveryFee}</span></div>
+      <div class="sum-row"><span>Delivery</span><span>${deliveryFee()===0?'<span style="color:var(--sage);font-weight:600;">Free</span>':'Rs. '+getDeliveryFee()}</span></div>
       <hr style="border:none;border-top:1px solid var(--rose-soft);margin:0.6rem 0;">
       <div class="sum-row sum-total"><span>Total</span><span style="color:var(--rose);">Rs. ${orderTotal().toLocaleString()}</span></div>
     </div>
@@ -610,9 +717,10 @@ function checkoutHTML() {
 
 function selPay(id) {
   document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('sel'));
-  document.getElementById(id).classList.add('sel');
-  const esewaInfo = document.getElementById('esewaInfo');
-  esewaInfo.style.display = id === 'pop-digi' ? 'block' : 'none';
+  const el = document.getElementById(id);
+  if (el) el.classList.add('sel');
+  const ep = document.getElementById('esewa-panel');
+  if (ep) ep.style.display = id==='pop-esewa' ? 'block' : 'none';
 }
 
 function placeOrder() {
@@ -624,14 +732,21 @@ function placeOrder() {
 
   const pay = document.querySelector('input[name="pay"]:checked').value;
   const id  = 'DSY' + Date.now().toString().slice(-6);
-  const order = { id, name, phone, addr, date, msg: document.getElementById('co-msg').value.trim(), pay, items:[...cart], total: orderTotal(), status:'Processing', placed: new Date().toLocaleDateString('en-NP') };
+  const order = {
+    id, name, phone, addr, date,
+    msg: document.getElementById('co-msg').value.trim(),
+    pay, items:[...cart], total: orderTotal(), status:'Processing',
+    placed: new Date().toLocaleDateString('en-NP')
+  };
   orders.unshift(order);
   saveOrders();
   cart = []; saveCart();
   navigate('confirm', order);
 }
 
-// ── CONFIRM ────────────────────────────────────
+// ════════════════════════════════════════════════
+//  CONFIRM
+// ════════════════════════════════════════════════
 function confirmHTML() {
   const o = currentOrder;
   if (!o) return '<div class="empty"><p>No order found.</p></div>';
@@ -639,7 +754,7 @@ function confirmHTML() {
   <div class="page confirm-page">
     <div class="confirm-icon">🌸</div>
     <h2 class="confirm-title">Order Placed!</h2>
-    <p style="color:var(--text-soft);margin-bottom:0.9rem;">Thank you, <strong>${o.name}</strong>! Your beautiful knitted creation is on its way.</p>
+    <p style="color:var(--text-soft);margin-bottom:0.9rem;">Thank you, <strong>${o.name}</strong>! We'll start crafting your bouquet soon.</p>
     <div class="confirm-id">Order: ${o.id}</div>
     <div class="confirm-box">
       <div class="confirm-row"><strong>Deliver to</strong><span>${o.addr}</span></div>
@@ -647,26 +762,29 @@ function confirmHTML() {
       <div class="confirm-row"><strong>Payment</strong><span>${o.pay==='cod'?'Cash on Delivery':'eSewa'}</span></div>
       <div class="confirm-row"><strong>Total</strong><span style="color:var(--rose);font-weight:700;">Rs. ${o.total.toLocaleString()}</span></div>
     </div>
+    ${o.pay==='esewa' && SETTINGS.esewaPhone ? `<div style="background:var(--beige);border-radius:var(--r-sm);padding:1rem;margin-bottom:1.5rem;font-size:0.85rem;"><strong>eSewa Payment Reminder:</strong> Please send Rs. ${o.total.toLocaleString()} to <strong>${SETTINGS.esewaPhone}</strong> and send us the screenshot on WhatsApp.</div>` : ''}
     <p style="color:var(--text-soft);font-size:0.85rem;margin-bottom:2rem;">We'll call <strong>${o.phone}</strong> shortly to confirm your order.</p>
     <div style="display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;">
       <button class="btn-primary" onclick="navigate('home')">Continue Shopping</button>
-      <button class="btn-outline" onclick="openWhatsApp()">💬 Talk to Us</button>
+      <button class="btn-outline" onclick="openWhatsApp()">💬 Message on WhatsApp</button>
     </div>
   </div>`;
 }
 
-// ── ABOUT ──────────────────────────────────────
+// ════════════════════════════════════════════════
+//  ABOUT
+// ════════════════════════════════════════════════
 function aboutHTML() {
   return `
   <div class="page">
     <div class="about-hero">
       <div class="section-label">Our Story</div>
       <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;color:var(--dark);margin:0.5rem 0;">We Are Daisy 🌸</h1>
-      <p style="max-width:540px;margin:1rem auto;color:var(--text-soft);line-height:1.8;font-size:0.95rem;">Born from a love of crafting and a belief that every moment deserves a memory — Daisy is Dharan's home for handcrafted, everlasting knitted bouquets made with love and premium yarn.</p>
+      <p style="max-width:540px;margin:1rem auto;color:var(--text-soft);line-height:1.8;font-size:0.95rem;">Born from a love of crafting — Daisy is Dharan's home for handmade knitted bouquets. Each piece is made to order with premium yarn and heartfelt attention, creating a gift that lasts forever.</p>
     </div>
     <div class="section">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;">
-        ${[['🧶','Everlasting Love','Every bouquet is crafted from high-quality yarn, ensuring your gift never fades and stays beautiful forever.'],['✂️','Hand-Knitted','Each flower is carefully hand-knitted and wrapped with a personal touch in every stitch.'],['💛','Made with Love','From a small shop in Dharan — every bouquet carries our heart and care into your hands.']].map(([e,t,d])=>`
+        ${[['🧶','Always Handmade','Every bouquet is hand-knitted on order — made with quality yarn and genuine care, never mass-produced.'],['🎨','Custom Made','Choose colours, styles, and occasions. Each arrangement is designed personally, just for you.'],['💛','Made with Love','From a small studio in Dharan — every stitch carries our heart and care into your hands.']].map(([e,t,d])=>`
           <div style="text-align:center;padding:2rem;">
             <div style="font-size:2.8rem;margin-bottom:1rem;">${e}</div>
             <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--dark);margin-bottom:0.5rem;">${t}</h3>
@@ -678,7 +796,9 @@ function aboutHTML() {
   </div>`;
 }
 
-// ── CONTACT ────────────────────────────────────
+// ════════════════════════════════════════════════
+//  CONTACT
+// ════════════════════════════════════════════════
 function contactHTML() {
   return `
   <div class="page">
@@ -686,50 +806,84 @@ function contactHTML() {
       <div class="section-header">
         <div class="section-label">Get in Touch</div>
         <h2 class="section-title">We'd Love to Hear From You</h2>
-        <p style="color:var(--text-soft);margin-top:0.65rem;font-size:0.92rem;">Order by phone, WhatsApp, Instagram, or visit us in person.</p>
+        <p style="color:var(--text-soft);margin-top:0.65rem;font-size:0.92rem;">Order by phone, WhatsApp, or visit us in person.</p>
       </div>
       <div class="contact-grid">
-        <div class="ccard"><div class="ccard-icon">📍</div><div class="ccard-title">Our Location</div><div class="ccard-val"><a href="https://maps.google.com/?q=Near+R78J+G5X,+Chatara+Line,+Dharan+56700" target="_blank" style="color:inherit;text-decoration:none;">Near R78J+G5X,<br>Chatara Line,<br>Dharan 56700</a></div></div>
-        <div class="ccard"><div class="ccard-icon">📞</div><div class="ccard-title">Call Us</div><div class="ccard-val"><a href="tel:9706348791" style="color:var(--rose);font-size:1.1rem;font-weight:600;text-decoration:none;">9706348791</a><br><span style="font-size:0.78rem;">Sun – Fri, 7 AM – 7 PM</span></div></div>
-        <div class="ccard"><div class="ccard-icon">💬</div><div class="ccard-title">Message Us</div><div class="ccard-val" style="margin-top:0.5rem;"><button class="btn-primary" onclick="openWhatsApp()">WhatsApp</button></div></div>
-        <div class="ccard"><div class="ccard-icon">🕐</div><div class="ccard-title">Opening Hours</div><div class="ccard-val">Sun – Fri: 7 AM – 7 PM<br>Saturday: 8 AM – 5 PM<br><span style="color:var(--rose);font-size:0.78rem;font-weight:500;">Delivery stops at 6 PM</span></div></div>
+        <div class="ccard">
+          <div class="ccard-icon">📍</div>
+          <div class="ccard-title">Our Location</div>
+          <div class="ccard-val">
+            <a href="https://maps.google.com/?q=R78J%2BG5X+Chatara+Line+Dharan+56700+Nepal" target="_blank" style="color:var(--rose);text-decoration:none;font-weight:500;">
+              Near R78J+G5X, Chatara Line<br>Dharan 56700, Nepal<br>
+              <span style="font-size:0.78rem;text-decoration:underline;">Open in Maps →</span>
+            </a>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">📞</div>
+          <div class="ccard-title">Call Us</div>
+          <div class="ccard-val">
+            <a href="tel:9706348791" style="color:var(--rose);font-size:1.1rem;font-weight:600;text-decoration:none;">9706348791</a><br>
+            <span style="font-size:0.78rem;">Sun – Fri, 7 AM – 7 PM</span>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">💬</div>
+          <div class="ccard-title">WhatsApp Order</div>
+          <div class="ccard-val" style="margin-top:0.5rem;">
+            <button class="btn-primary" onclick="openWhatsApp()">Message Us</button>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">🕐</div>
+          <div class="ccard-title">Opening Hours</div>
+          <div class="ccard-val">Sun – Fri: 7 AM – 7 PM<br>Saturday: 8 AM – 5 PM<br><span style="color:var(--rose);font-size:0.78rem;font-weight:500;">Delivery stops at 6 PM</span></div>
+        </div>
       </div>
     </div>
   </div>`;
 }
 
-// ── INIT ───────────────────────────────────────
+// ════════════════════════════════════════════════
+//  INIT — load products + settings from GitHub
+// ════════════════════════════════════════════════
 async function initApp() {
-  // Push initial state so "Back" works from the start
-  history.replaceState({ page: 'home' }, '', '?p=home');
-
   document.getElementById('app').innerHTML = `
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;color:var(--text-soft);">
       <div style="font-size:2.5rem;animation:spin 1s linear infinite;">🌸</div>
-      <p style="font-size:0.9rem;">Loading creations…</p>
+      <p style="font-size:0.9rem;">Loading…</p>
     </div>`;
 
+  // Try loading settings from GitHub
   try {
-    const resp = await fetch(GITHUB_RAW + '?t=' + Date.now());
-    if (resp.ok) {
-      const data = await resp.json();
-      if (Array.isArray(data)) {
-        PRODUCTS = data;
-      } else {
-        PRODUCTS = data.products || [];
-        SETTINGS = data.settings || SETTINGS;
-      }
+    const sr = await fetch(GITHUB_RAW_SETTINGS + '?t=' + Date.now());
+    if (sr.ok) {
+      const remoteSettings = await sr.json();
+      SETTINGS = { ...SETTINGS, ...remoteSettings };
+      localStorage.setItem('daisy_settings', JSON.stringify(SETTINGS));
     }
-  } catch(e) {} // Starts empty safely if fetch fails
+  } catch(e) { /* use localStorage settings */ }
+
+  // Try loading products from GitHub
+  try {
+    const pr = await fetch(GITHUB_RAW + '?t=' + Date.now());
+    if (pr.ok) {
+      PRODUCTS = await pr.json();
+    } else {
+      PRODUCTS = DEFAULT_PRODUCTS;
+    }
+  } catch(e) {
+    PRODUCTS = DEFAULT_PRODUCTS;
+  }
+
+  // Set initial history state
+  history.replaceState({ page: 'home', prodId: null, shopCat: 'all' }, '', '#home');
 
   syncCartCount();
   render();
 }
 
-const style = document.createElement('style');
-style.textContent = '@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}';
-document.head.appendChild(style);
-
+document.head.insertAdjacentHTML('beforeend', '<style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>');
 initApp();
 </script>
 </body>
