@@ -1,37 +1,5 @@
 [
   {
-    "id": 5,
-    "name": "Pink Dream",
-    "cat": "birthday",
-    "emoji": "🌸",
-    "imageUrl": "",
-    "base": 750,
-    "badge": "New",
-    "stock": 18,
-    "desc": "Soft pink roses and carnations beautifully wrapped.",
-    "sizes": {
-      "Small": 750,
-      "Medium": 1100,
-      "Premium": 1600
-    }
-  },
-  {
-    "id": 6,
-    "name": "Wildflower Mix",
-    "cat": "custom",
-    "emoji": "💐",
-    "imageUrl": "",
-    "base": 700,
-    "badge": null,
-    "stock": 12,
-    "desc": "A hand-picked selection from our freshest seasonal arrivals.",
-    "sizes": {
-      "Small": 700,
-      "Medium": 1000,
-      "Premium": 1500
-    }
-  },
-  {
     "id": 7,
     "name": "Orchid Love",
     "cat": "anniversary",
