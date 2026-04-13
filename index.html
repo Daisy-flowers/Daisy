@@ -696,11 +696,16 @@ function checkoutHTML() {
         </label>` : ''}
       </div>
       ${ep ? `
-      <div id="esewa-panel" style="display:none;margin-top:1rem;background:var(--beige);border-radius:var(--r-sm);padding:1.25rem;text-align:center;">
-        <p style="font-size:0.88rem;margin-bottom:0.75rem;">Scan QR or open eSewa and send to <strong>${ep}</strong></p>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${ep}&bgcolor=ffffff&color=1C1212" style="border-radius:8px;width:160px;height:160px;display:block;margin:0 auto 0.75rem;">
-        <a href="https://esewa.com.np" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:#60BB46;color:#fff;padding:0.55rem 1.2rem;border-radius:50px;font-size:0.82rem;font-weight:600;text-decoration:none;">Open eSewa App →</a>
-        <p style="font-size:0.74rem;color:var(--text-soft);margin-top:0.75rem;">After payment, take a screenshot and send it to our WhatsApp.</p>
+      <div id="esewa-panel" style="display:none;margin-top:1rem;background:#F0FBF2;border:1.5px solid #60BB46;border-radius:var(--r-sm);padding:1.25rem;text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:0.4rem;">💚</div>
+        <p style="font-size:0.9rem;font-weight:600;color:#1a6627;margin-bottom:0.25rem;">Pay via eSewa</p>
+        <p style="font-size:0.8rem;color:#3a7a40;margin-bottom:1rem;">Send <strong>Rs. ${orderTotal().toLocaleString()}</strong> to <strong>${ep}</strong></p>
+        <button onclick="openEsewaApp('${ep}', ${orderTotal()})" style="display:inline-flex;align-items:center;gap:0.5rem;background:#60BB46;color:#fff;border:none;padding:0.7rem 1.5rem;border-radius:50px;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:0.75rem;">
+          Open eSewa →
+        </button>
+        <br>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ep}&bgcolor=ffffff&color=1a6627&margin=6" style="border-radius:8px;width:140px;height:140px;display:block;margin:0.75rem auto 0.5rem;">
+        <p style="font-size:0.72rem;color:#3a7a40;">Scan QR or use the button above.<br>After paying, send screenshot to our WhatsApp.</p>
       </div>` : ''}
     </div>
 
@@ -721,6 +726,35 @@ function selPay(id) {
   if (el) el.classList.add('sel');
   const ep = document.getElementById('esewa-panel');
   if (ep) ep.style.display = id==='pop-esewa' ? 'block' : 'none';
+}
+
+// ── ESEWA DEEP LINK ──────────────────────────
+function openEsewaApp(phone, amount) {
+  const ua = navigator.userAgent.toLowerCase();
+  const isAndroid = /android/.test(ua);
+  const isIOS     = /iphone|ipad|ipod/.test(ua);
+
+  // eSewa app deep links
+  const iosScheme    = `esewa://p?mobile=${phone}&amount=${amount}`;
+  const androidIntent = `intent://p?mobile=${phone}&amount=${amount}#Intent;scheme=esewa;package=com.f1soft.esewa;end`;
+  const webFallback  = `https://esewa.com.np`;
+
+  let launched = false;
+
+  if (isAndroid) {
+    // Android intent URL opens eSewa app directly; if not installed, opens Play Store
+    window.location.href = androidIntent;
+    launched = true;
+  } else if (isIOS) {
+    // iOS URL scheme
+    window.location.href = iosScheme;
+    launched = true;
+    // Fallback to web after 2s if app not installed
+    setTimeout(() => { window.open(webFallback, '_blank'); }, 2000);
+  } else {
+    // Desktop — open eSewa web
+    window.open(webFallback, '_blank');
+  }
 }
 
 function placeOrder() {
@@ -762,7 +796,13 @@ function confirmHTML() {
       <div class="confirm-row"><strong>Payment</strong><span>${o.pay==='cod'?'Cash on Delivery':'eSewa'}</span></div>
       <div class="confirm-row"><strong>Total</strong><span style="color:var(--rose);font-weight:700;">Rs. ${o.total.toLocaleString()}</span></div>
     </div>
-    ${o.pay==='esewa' && SETTINGS.esewaPhone ? `<div style="background:var(--beige);border-radius:var(--r-sm);padding:1rem;margin-bottom:1.5rem;font-size:0.85rem;"><strong>eSewa Payment Reminder:</strong> Please send Rs. ${o.total.toLocaleString()} to <strong>${SETTINGS.esewaPhone}</strong> and send us the screenshot on WhatsApp.</div>` : ''}
+    ${o.pay==='esewa' && SETTINGS.esewaPhone ? `
+    <div style="background:#F0FBF2;border:1.5px solid #60BB46;border-radius:var(--r-sm);padding:1rem 1.25rem;margin-bottom:1.5rem;text-align:center;">
+      <p style="font-size:0.88rem;color:#1a6627;font-weight:600;margin-bottom:0.5rem;">💚 Complete your eSewa payment</p>
+      <p style="font-size:0.82rem;color:#3a7a40;margin-bottom:0.75rem;">Send <strong>Rs. ${o.total.toLocaleString()}</strong> to <strong>${SETTINGS.esewaPhone}</strong></p>
+      <button onclick="openEsewaApp('${SETTINGS.esewaPhone}',${o.total})" style="background:#60BB46;color:#fff;border:none;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:700;cursor:pointer;">Open eSewa →</button>
+      <p style="font-size:0.72rem;color:#3a7a40;margin-top:0.6rem;">Send screenshot to our WhatsApp after payment.</p>
+    </div>` : ''}
     <p style="color:var(--text-soft);font-size:0.85rem;margin-bottom:2rem;">We'll call <strong>${o.phone}</strong> shortly to confirm your order.</p>
     <div style="display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;">
       <button class="btn-primary" onclick="navigate('home')">Continue Shopping</button>
