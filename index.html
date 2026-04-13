@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daisy — Knitted Bouquets, Dharan</title>
+  <title>Fuzzy Bloom — Knitted Bouquets, Dharan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
@@ -128,8 +128,8 @@
     .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--dark); }
     .cart-item-sub { font-size: 0.78rem; color: var(--text-soft); margin-top: 0.2rem; }
     .cart-item-price { font-size: 1.05rem; font-weight: 700; color: var(--rose); text-align: right; }
-    .cart-remove { background: none; border: none; color: var(--text-soft); cursor: pointer; font-size: 0.75rem; margin-top: 0.3rem; transition: color 0.2s; display: block; }
-    .cart-remove:hover { color: var(--rose); }
+    .cart-remove { background: #FEE2E2; border: none; color: #EF4444; cursor: pointer; font-size: 0.75rem; font-weight: 700; margin-top: 0.4rem; padding: 0.28rem 0.6rem; border-radius: 50px; transition: all 0.2s; display: block; letter-spacing: 0.02em; }
+    .cart-remove:hover { background: #EF4444; color: #fff; }
     .cart-summary { background: #fff; border-radius: var(--r); padding: 1.4rem; box-shadow: var(--shadow); margin-top: 1.25rem; }
     .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; }
 
@@ -160,6 +160,15 @@
     .confirm-row strong { min-width: 90px; color: var(--dark); }
     .confirm-row span { color: var(--text-soft); }
 
+    /* PAYMENT PAGE */
+    .pay-item { background: #fff; border-radius: var(--r); box-shadow: var(--shadow); margin-bottom: 0.9rem; overflow: hidden; }
+    .pay-item-header { display: flex; align-items: center; gap: 0.9rem; padding: 1.1rem; cursor: pointer; transition: background 0.2s; user-select: none; }
+    .pay-item-header:hover { background: var(--rose-pale); }
+    .pay-item-qr { display: none; padding: 1.25rem; background: #F0FBF2; border-top: 1.5px solid #c3e6c8; animation: fadeUp 0.2s ease both; }
+    .pay-item-qr.open { display: block; }
+    .pay-chevron { font-size: 0.75rem; color: var(--rose); font-weight: 700; transition: transform 0.2s; flex-shrink: 0; }
+    .pay-item-qr.open + .pay-chevron { transform: rotate(180deg); }
+
     /* ABOUT / CONTACT */
     .about-hero { background: linear-gradient(135deg, var(--rose-pale), var(--beige)); padding: 5rem 2rem; text-align: center; }
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1.25rem; }
@@ -183,7 +192,7 @@
     .footer-info { font-size: 0.8rem; margin-top: 0.75rem; }
     .footer-copy { font-size: 0.72rem; opacity: 0.35; margin-top: 0.75rem; }
 
-    /* FAB STACK (WhatsApp + Instagram circles) */
+    /* FAB STACK */
     .fab-stack { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: 0.65rem; align-items: center; }
     .fab-btn { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.25s; text-decoration: none; flex-shrink: 0; }
     .fab-wa { background: #25D366; box-shadow: 0 4px 20px rgba(37,211,102,0.45); animation: pulseWa 3s ease-in-out infinite; }
@@ -208,7 +217,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo" onclick="navigate('home')">🌸 Daisy</div>
+  <div class="nav-logo" onclick="navigate('home')">🌸 Fuzzy Bloom</div>
   <ul class="nav-links">
     <li><a onclick="navigate('home')">Home</a></li>
     <li><a onclick="navigate('shop')">Shop</a></li>
@@ -226,7 +235,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">🌸 Daisy</div>
+  <div class="footer-logo">🌸 Fuzzy Bloom</div>
   <p style="font-size:0.85rem;">Knitted Bouquets, Crafted With Love</p>
   <div class="footer-links">
     <a onclick="navigate('home')">Home</a>
@@ -241,7 +250,7 @@
     &nbsp;|&nbsp;
     <a href="tel:9706348791" style="color:rgba(253,248,242,0.65);text-decoration:none;">📞 9706348791</a>
   </p>
-  <p class="footer-copy">© 2025 Daisy Bouquets. All rights reserved.</p>
+  <p class="footer-copy">© 2025 Fuzzy Bloom. All rights reserved.</p>
 </footer>
 
 <!-- FAB STACK: WhatsApp + Instagram -->
@@ -262,9 +271,8 @@ const GITHUB_RAW          = 'https://raw.githubusercontent.com/Daisy-flowers/Dai
 const GITHUB_RAW_SETTINGS = 'https://raw.githubusercontent.com/Daisy-flowers/Daisy/main/data/settings.json';
 
 let PRODUCTS = [];
-const DEFAULT_PRODUCTS = []; // Admin adds real products — no fake defaults
+const DEFAULT_PRODUCTS = [];
 
-// Load settings (delivery fee, eSewa phone) from localStorage
 function loadSettings() {
   try { return JSON.parse(localStorage.getItem('daisy_settings') || '{}'); } catch { return {}; }
 }
@@ -300,12 +308,13 @@ let cart   = JSON.parse(localStorage.getItem('daisy_cart')   || '[]');
 let orders = JSON.parse(localStorage.getItem('daisy_orders') || '[]');
 
 // ════════════════════════════════════════════════
-//  NAVIGATE — with History API (back button fix)
+//  NAVIGATE — with History API
 // ════════════════════════════════════════════════
 function navigate(p, data, fromPop=false) {
   page = p;
   if (p === 'product' && data != null) { currentProdId = data; selectedAddons = []; }
   if (p === 'confirm' && data != null) { currentOrder = data; }
+  if (p === 'payment' && data != null) { currentOrder = data; }
 
   if (!fromPop) {
     const state = { page: p, prodId: currentProdId, shopCat };
@@ -384,7 +393,7 @@ function toast(msg) {
 //  WHATSAPP
 // ════════════════════════════════════════════════
 function openWhatsApp() {
-  const msg = encodeURIComponent("Hello Daisy! 🌸 I'd like to order a knitted bouquet.");
+  const msg = encodeURIComponent("Hello Fuzzy Bloom! 🌸 I'd like to order a knitted bouquet.");
   window.open(`https://wa.me/9779706348791?text=${msg}`, '_blank');
 }
 
@@ -399,6 +408,7 @@ function render() {
     case 'product':  app.innerHTML = productHTML(); break;
     case 'cart':     app.innerHTML = cartHTML();    break;
     case 'checkout': app.innerHTML = checkoutHTML();break;
+    case 'payment':  app.innerHTML = paymentHTML(); break;
     case 'confirm':  app.innerHTML = confirmHTML(); break;
     case 'about':    app.innerHTML = aboutHTML();   break;
     case 'contact':  app.innerHTML = contactHTML(); break;
@@ -411,7 +421,6 @@ function render() {
 //  HOME
 // ════════════════════════════════════════════════
 function homeHTML() {
-  // Use first 4 products safely (no crash if fewer)
   const featured = PRODUCTS.slice(0, 4);
   return `
   <div class="page">
@@ -505,9 +514,6 @@ function shopHTML() {
 function pcardHTML(p) {
   const price = getPrice(p);
   const isOOS = p.stock !== undefined && Number(p.stock) <= 0;
-  const imgInner = p.imageUrl
-    ? `<img src="${p.imageUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">${isOOS?'':''}<span style="display:none;font-size:5.5rem;">${p.emoji}</span>`
-    : p.emoji;
   return `
   <div class="pcard" onclick="navigate('product',${p.id})">
     <div class="pcard-img-wrap">
@@ -692,39 +698,23 @@ function checkoutHTML() {
         ${ep ? `
         <label class="pay-opt" id="pop-esewa">
           <input type="radio" name="pay" value="esewa" onchange="selPay('pop-esewa')">
-          <div><div class="pay-name">💚 eSewa</div><div class="pay-desc">Pay via eSewa to ${ep}</div></div>
+          <div><div class="pay-name">💚 eSewa</div><div class="pay-desc">Pay via eSewa — QR codes shown after confirming</div></div>
         </label>` : ''}
       </div>
       ${ep ? `
       <div id="esewa-panel" style="display:none;margin-top:1rem;background:#F0FBF2;border:1.5px solid #60BB46;border-radius:var(--r-sm);padding:1.25rem;">
-        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+        <div style="display:flex;align-items:center;gap:0.55rem;margin-bottom:0.75rem;">
           <span style="font-size:1.3rem;">💚</span>
           <div>
             <div style="font-size:0.9rem;font-weight:700;color:#1a6627;">Pay with eSewa</div>
-            <div style="font-size:0.74rem;color:#3a7a40;">Open eSewa → Send Money → paste details below</div>
+            <div style="font-size:0.74rem;color:#3a7a40;">After placing your order, you'll get individual QR codes for each item.</div>
           </div>
         </div>
-
-        <div style="background:#fff;border-radius:8px;padding:0.85rem;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;border:1px solid #c3e6c8;">
-          <div>
-            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:#3a7a40;font-weight:600;">Send To (Phone)</div>
-            <div style="font-size:1.1rem;font-weight:700;color:#1a6627;letter-spacing:0.05em;">${ep}</div>
-          </div>
-          <button onclick="copyToClipboard('${ep}','phone')" style="background:#60BB46;color:#fff;border:none;padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:700;cursor:pointer;" id="copyPhoneBtn">Copy</button>
+        <div style="background:#fff;border-radius:8px;padding:0.75rem 1rem;border:1px solid #c3e6c8;text-align:center;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#3a7a40;font-weight:600;">Total to pay</div>
+          <div style="font-size:1.35rem;font-weight:800;color:#1a6627;">Rs. ${orderTotal().toLocaleString()}</div>
         </div>
-
-        <div style="background:#fff;border-radius:8px;padding:0.85rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;border:1px solid #c3e6c8;">
-          <div>
-            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:#3a7a40;font-weight:600;">Amount</div>
-            <div style="font-size:1.1rem;font-weight:700;color:#1a6627;">Rs. ${orderTotal().toLocaleString()}</div>
-          </div>
-          <button onclick="copyToClipboard('${orderTotal()}','amount')" style="background:#60BB46;color:#fff;border:none;padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:700;cursor:pointer;" id="copyAmountBtn">Copy</button>
-        </div>
-
-        <button onclick="openEsewaApp()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;background:#60BB46;color:#fff;border:none;padding:0.8rem;border-radius:8px;font-size:0.92rem;font-weight:700;cursor:pointer;margin-bottom:0.6rem;">
-          📱 Open eSewa App
-        </button>
-        <p style="font-size:0.72rem;color:#3a7a40;text-align:center;margin:0;">After paying, send us a screenshot on WhatsApp to confirm.</p>
+        <p style="font-size:0.72rem;color:#3a7a40;text-align:center;margin-top:0.7rem;">📸 Send payment screenshots to our Instagram or WhatsApp to confirm.</p>
       </div>` : ''}
     </div>
 
@@ -735,7 +725,7 @@ function checkoutHTML() {
       <div class="sum-row sum-total"><span>Total</span><span style="color:var(--rose);">Rs. ${orderTotal().toLocaleString()}</span></div>
     </div>
 
-    <button class="btn-primary" style="width:100%;justify-content:center;padding:0.95rem;" onclick="placeOrder()">Place Order 🌸</button>
+    <button class="btn-primary" style="width:100%;justify-content:center;padding:0.95rem;" onclick="placeOrder()">Confirm Order 🌸</button>
   </div>`;
 }
 
@@ -747,51 +737,6 @@ function selPay(id) {
   if (ep) ep.style.display = id==='pop-esewa' ? 'block' : 'none';
 }
 
-// ── ESEWA ────────────────────────────────────
-// eSewa has no public deep link that pre-fills Send Money.
-// We open the app home and give the user copy buttons to paste details.
-function openEsewaApp() {
-  const ua = navigator.userAgent.toLowerCase();
-  if (/android|iphone|ipad|ipod/.test(ua)) {
-    const a = document.createElement('a');
-    a.href = 'esewa://';
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  } else {
-    window.open('https://esewa.com.np', '_blank');
-  }
-}
-
-function copyToClipboard(text, type) {
-  const btnId = type === 'phone' ? 'copyPhoneBtn' : 'copyAmountBtn';
-  const done = () => {
-    const btn = document.getElementById(btnId);
-    if (btn) {
-      const orig = btn.textContent;
-      btn.textContent = '✓ Copied!';
-      btn.style.background = '#1a6627';
-      setTimeout(() => { btn.textContent = orig; btn.style.background = '#60BB46'; }, 2000);
-    }
-  };
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(String(text)).then(done).catch(() => fallbackCopy(text, done));
-  } else {
-    fallbackCopy(text, done);
-  }
-}
-
-function fallbackCopy(text, cb) {
-  const ta = document.createElement('textarea');
-  ta.value = String(text);
-  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
-  document.body.appendChild(ta);
-  ta.focus(); ta.select();
-  try { document.execCommand('copy'); if (cb) cb(); } catch(e) { toast('Copy failed — select manually'); }
-  document.body.removeChild(ta);
-}
-
 function placeOrder() {
   const name  = document.getElementById('co-name').value.trim();
   const phone = document.getElementById('co-phone').value.trim();
@@ -800,7 +745,7 @@ function placeOrder() {
   if (!name||!phone||!addr||!date) { toast('Please fill all required fields ⚠️'); return; }
 
   const pay = document.querySelector('input[name="pay"]:checked').value;
-  const id  = 'DSY' + Date.now().toString().slice(-6);
+  const id  = 'FZB' + Date.now().toString().slice(-6);
   const order = {
     id, name, phone, addr, date,
     msg: document.getElementById('co-msg').value.trim(),
@@ -810,7 +755,92 @@ function placeOrder() {
   orders.unshift(order);
   saveOrders();
   cart = []; saveCart();
-  navigate('confirm', order);
+
+  if (pay === 'esewa') {
+    navigate('payment', order);
+  } else {
+    navigate('confirm', order);
+  }
+}
+
+// ════════════════════════════════════════════════
+//  PAYMENT PAGE — per-item eSewa QR
+// ════════════════════════════════════════════════
+function paymentHTML() {
+  const o = currentOrder;
+  const ep = SETTINGS.esewaPhone || '';
+  if (!o) return `<div class="empty"><div class="empty-icon">🌸</div><h3>No order found</h3><button class="btn-primary" style="margin-top:1.3rem;" onclick="navigate('home')">Go Home</button></div>`;
+
+  const waLink = `https://wa.me/9779706348791?text=${encodeURIComponent('Hi Fuzzy Bloom! 🌸 Here is my eSewa payment screenshot for Order: ' + o.id)}`;
+  const igLink = 'https://www.instagram.com/daisynextdoor06';
+
+  return `
+  <div class="page checkout-page">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--dark);margin-bottom:0.4rem;">Pay for Your Items</h2>
+    <p style="color:var(--text-soft);font-size:0.88rem;margin-bottom:0.35rem;">Order <strong style="color:var(--rose);">${o.id}</strong></p>
+    <p style="color:var(--text-soft);font-size:0.84rem;margin-bottom:1.8rem;">Tap each item below to see its eSewa QR code, pay, then send the screenshot to confirm.</p>
+
+    ${o.items.map((item, idx) => `
+    <div class="pay-item" id="pi-${idx}">
+      <div class="pay-item-header" onclick="togglePayItem(${idx})">
+        <div style="width:58px;height:58px;border-radius:var(--r-sm);background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;flex-shrink:0;">
+          ${item.imageUrl
+            ? `<img src="${item.imageUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.outerHTML='<span style=font-size:1.8rem>${item.emoji}</span>'">`
+            : item.emoji}
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div class="cart-item-name">${item.name}</div>
+          ${item.addons.length ? `<div class="cart-item-sub">+ ${item.addons.join(', ')}</div>` : ''}
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="cart-item-price">Rs. ${item.price.toLocaleString()}</div>
+          <div style="font-size:0.7rem;color:var(--rose);font-weight:700;margin-top:0.2rem;" id="tap-label-${idx}">Tap to Pay ↓</div>
+        </div>
+      </div>
+      <div class="pay-item-qr" id="pqr-${idx}">
+        ${ep ? `
+        <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(ep)}&bgcolor=FFFFFF&color=1a6627&qzone=2"
+            alt="eSewa QR Code"
+            style="width:160px;height:160px;border-radius:12px;border:3px solid #60BB46;display:block;">
+          <div style="text-align:center;">
+            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:#3a7a40;font-weight:700;">Send to eSewa</div>
+            <div style="font-size:1.15rem;font-weight:700;color:#1a6627;margin-top:0.15rem;">${ep}</div>
+            <div style="font-size:1.8rem;font-weight:800;color:#1a6627;margin-top:0.1rem;">Rs. ${item.price.toLocaleString()}</div>
+          </div>
+          <div style="background:#fff;border:1.5px solid #c3e6c8;border-radius:var(--r-sm);padding:0.9rem 1rem;text-align:center;width:100%;">
+            <p style="font-size:0.8rem;color:#3a7a40;font-weight:700;margin-bottom:0.6rem;">📸 After paying, send your screenshot to:</p>
+            <div style="display:flex;gap:0.7rem;justify-content:center;flex-wrap:wrap;">
+              <a href="${igLink}" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;padding:0.5rem 1.1rem;border-radius:50px;font-size:0.8rem;font-weight:700;text-decoration:none;">📷 Instagram</a>
+              <a href="${waLink}" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:#25D366;color:#fff;padding:0.5rem 1.1rem;border-radius:50px;font-size:0.8rem;font-weight:700;text-decoration:none;">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>` : `<p style="color:var(--text-soft);font-size:0.85rem;text-align:center;">eSewa not configured. Please pay on delivery or contact us.</p>`}
+      </div>
+    </div>`).join('')}
+
+    <div style="background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:1.4rem;margin-top:1.5rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:1.05rem;font-weight:700;margin-bottom:1.1rem;">
+        <span>Order Total</span>
+        <span style="color:var(--rose);">Rs. ${o.total.toLocaleString()}</span>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;padding:0.95rem;" onclick="navigate('confirm',currentOrder)">✓ I've Sent All Screenshots 🌸</button>
+    </div>
+  </div>`;
+}
+
+function togglePayItem(idx) {
+  const panel = document.getElementById('pqr-' + idx);
+  const label = document.getElementById('tap-label-' + idx);
+  if (!panel) return;
+  const isOpen = panel.classList.contains('open');
+  document.querySelectorAll('.pay-item-qr').forEach(p => p.classList.remove('open'));
+  document.querySelectorAll('[id^="tap-label-"]').forEach(l => l.textContent = 'Tap to Pay ↓');
+  if (!isOpen) {
+    panel.classList.add('open');
+    if (label) label.textContent = 'Tap to Close ↑';
+  }
 }
 
 // ════════════════════════════════════════════════
@@ -819,6 +849,8 @@ function placeOrder() {
 function confirmHTML() {
   const o = currentOrder;
   if (!o) return '<div class="empty"><p>No order found.</p></div>';
+  const igLink = 'https://www.instagram.com/daisynextdoor06';
+  const waLink = `https://wa.me/9779706348791?text=${encodeURIComponent('Hi Fuzzy Bloom! 🌸 Here is my eSewa payment screenshot for Order: ' + o.id)}`;
   return `
   <div class="page confirm-page">
     <div class="confirm-icon">🌸</div>
@@ -831,12 +863,14 @@ function confirmHTML() {
       <div class="confirm-row"><strong>Payment</strong><span>${o.pay==='cod'?'Cash on Delivery':'eSewa'}</span></div>
       <div class="confirm-row"><strong>Total</strong><span style="color:var(--rose);font-weight:700;">Rs. ${o.total.toLocaleString()}</span></div>
     </div>
-    ${o.pay==='esewa' && SETTINGS.esewaPhone ? `
+    ${o.pay==='esewa' ? `
     <div style="background:#F0FBF2;border:1.5px solid #60BB46;border-radius:var(--r-sm);padding:1rem 1.25rem;margin-bottom:1.5rem;text-align:center;">
-      <p style="font-size:0.88rem;color:#1a6627;font-weight:600;margin-bottom:0.5rem;">💚 Complete your eSewa payment</p>
-      <p style="font-size:0.82rem;color:#3a7a40;margin-bottom:0.75rem;">Send <strong>Rs. ${o.total.toLocaleString()}</strong> to <strong>${SETTINGS.esewaPhone}</strong></p>
-      <button onclick="openEsewaApp()" style="background:#60BB46;color:#fff;border:none;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:700;cursor:pointer;">Open eSewa →</button>
-      <p style="font-size:0.72rem;color:#3a7a40;margin-top:0.6rem;">Send screenshot to our WhatsApp after payment.</p>
+      <p style="font-size:0.88rem;color:#1a6627;font-weight:700;margin-bottom:0.45rem;">💚 Don't forget to confirm payment!</p>
+      <p style="font-size:0.82rem;color:#3a7a40;margin-bottom:0.8rem;">Send your eSewa screenshots to us:</p>
+      <div style="display:flex;gap:0.65rem;justify-content:center;flex-wrap:wrap;">
+        <a href="${igLink}" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;padding:0.45rem 1rem;border-radius:50px;font-size:0.8rem;font-weight:700;text-decoration:none;">📷 Instagram</a>
+        <a href="${waLink}" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:#25D366;color:#fff;padding:0.45rem 1rem;border-radius:50px;font-size:0.8rem;font-weight:700;text-decoration:none;">💬 WhatsApp</a>
+      </div>
     </div>` : ''}
     <p style="color:var(--text-soft);font-size:0.85rem;margin-bottom:2rem;">We'll call <strong>${o.phone}</strong> shortly to confirm your order.</p>
     <div style="display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;">
@@ -854,8 +888,8 @@ function aboutHTML() {
   <div class="page">
     <div class="about-hero">
       <div class="section-label">Our Story</div>
-      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;color:var(--dark);margin:0.5rem 0;">We Are Daisy 🌸</h1>
-      <p style="max-width:540px;margin:1rem auto;color:var(--text-soft);line-height:1.8;font-size:0.95rem;">Born from a love of crafting — Daisy is Dharan's home for handmade knitted bouquets. Each piece is made to order with premium yarn and heartfelt attention, creating a gift that lasts forever.</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;color:var(--dark);margin:0.5rem 0;">We Are Fuzzy Bloom 🌸</h1>
+      <p style="max-width:540px;margin:1rem auto;color:var(--text-soft);line-height:1.8;font-size:0.95rem;">Born from a love of crafting — Fuzzy Bloom is Dharan's home for handmade knitted bouquets. Each piece is made to order with premium yarn and heartfelt attention, creating a gift that lasts forever.</p>
     </div>
     <div class="section">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;">
@@ -920,7 +954,7 @@ function contactHTML() {
 }
 
 // ════════════════════════════════════════════════
-//  INIT — load products + settings from GitHub
+//  INIT
 // ════════════════════════════════════════════════
 async function initApp() {
   document.getElementById('app').innerHTML = `
@@ -929,7 +963,6 @@ async function initApp() {
       <p style="font-size:0.9rem;">Loading…</p>
     </div>`;
 
-  // Try loading settings from GitHub
   try {
     const sr = await fetch(GITHUB_RAW_SETTINGS + '?t=' + Date.now());
     if (sr.ok) {
@@ -939,7 +972,6 @@ async function initApp() {
     }
   } catch(e) { /* use localStorage settings */ }
 
-  // Try loading products from GitHub
   try {
     const pr = await fetch(GITHUB_RAW + '?t=' + Date.now());
     if (pr.ok) {
@@ -951,9 +983,7 @@ async function initApp() {
     PRODUCTS = DEFAULT_PRODUCTS;
   }
 
-  // Set initial history state
   history.replaceState({ page: 'home', prodId: null, shopCat: 'all' }, '', '#home');
-
   syncCartCount();
   render();
 }
