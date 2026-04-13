@@ -696,16 +696,35 @@ function checkoutHTML() {
         </label>` : ''}
       </div>
       ${ep ? `
-      <div id="esewa-panel" style="display:none;margin-top:1rem;background:#F0FBF2;border:1.5px solid #60BB46;border-radius:var(--r-sm);padding:1.25rem;text-align:center;">
-        <div style="font-size:1.5rem;margin-bottom:0.4rem;">💚</div>
-        <p style="font-size:0.9rem;font-weight:600;color:#1a6627;margin-bottom:0.25rem;">Pay via eSewa</p>
-        <p style="font-size:0.8rem;color:#3a7a40;margin-bottom:1rem;">Send <strong>Rs. ${orderTotal().toLocaleString()}</strong> to <strong>${ep}</strong></p>
-        <button onclick="openEsewaApp('${ep}', ${orderTotal()})" style="display:inline-flex;align-items:center;gap:0.5rem;background:#60BB46;color:#fff;border:none;padding:0.7rem 1.5rem;border-radius:50px;font-size:0.9rem;font-weight:700;cursor:pointer;margin-bottom:0.75rem;">
-          Open eSewa →
+      <div id="esewa-panel" style="display:none;margin-top:1rem;background:#F0FBF2;border:1.5px solid #60BB46;border-radius:var(--r-sm);padding:1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;">
+          <span style="font-size:1.3rem;">💚</span>
+          <div>
+            <div style="font-size:0.9rem;font-weight:700;color:#1a6627;">Pay with eSewa</div>
+            <div style="font-size:0.74rem;color:#3a7a40;">Open eSewa → Send Money → paste details below</div>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:0.85rem;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;border:1px solid #c3e6c8;">
+          <div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:#3a7a40;font-weight:600;">Send To (Phone)</div>
+            <div style="font-size:1.1rem;font-weight:700;color:#1a6627;letter-spacing:0.05em;">${ep}</div>
+          </div>
+          <button onclick="copyToClipboard('${ep}','phone')" style="background:#60BB46;color:#fff;border:none;padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:700;cursor:pointer;" id="copyPhoneBtn">Copy</button>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:0.85rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;border:1px solid #c3e6c8;">
+          <div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:#3a7a40;font-weight:600;">Amount</div>
+            <div style="font-size:1.1rem;font-weight:700;color:#1a6627;">Rs. ${orderTotal().toLocaleString()}</div>
+          </div>
+          <button onclick="copyToClipboard('${orderTotal()}','amount')" style="background:#60BB46;color:#fff;border:none;padding:0.4rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:700;cursor:pointer;" id="copyAmountBtn">Copy</button>
+        </div>
+
+        <button onclick="openEsewaApp()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;background:#60BB46;color:#fff;border:none;padding:0.8rem;border-radius:8px;font-size:0.92rem;font-weight:700;cursor:pointer;margin-bottom:0.6rem;">
+          📱 Open eSewa App
         </button>
-        <br>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ep}&bgcolor=ffffff&color=1a6627&margin=6" style="border-radius:8px;width:140px;height:140px;display:block;margin:0.75rem auto 0.5rem;">
-        <p style="font-size:0.72rem;color:#3a7a40;">Scan QR or use the button above.<br>After paying, send screenshot to our WhatsApp.</p>
+        <p style="font-size:0.72rem;color:#3a7a40;text-align:center;margin:0;">After paying, send us a screenshot on WhatsApp to confirm.</p>
       </div>` : ''}
     </div>
 
@@ -728,55 +747,49 @@ function selPay(id) {
   if (ep) ep.style.display = id==='pop-esewa' ? 'block' : 'none';
 }
 
-// ── ESEWA DEEP LINK ──────────────────────────
-function openEsewaApp(phone, amount) {
-  const ua        = navigator.userAgent.toLowerCase();
-  const isAndroid = /android/.test(ua);
-  const isIOS     = /iphone|ipad|ipod/.test(ua);
-  const schemeUrl = `esewa://p?mobile=${phone}&amount=${amount}`;
-
-  if (isAndroid) {
-    // Track whether the browser tab went into the background.
-    // When eSewa opens, the browser fires visibilitychange → 'hidden'.
-    // We only show the "not installed" toast if that never happens.
-    let appLaunched = false;
-
-    const onVisChange = () => {
-      if (document.visibilityState === 'hidden') appLaunched = true;
-    };
-    document.addEventListener('visibilitychange', onVisChange);
-
-    // Trigger the URL scheme via anchor click (avoids Play Store redirect)
+// ── ESEWA ────────────────────────────────────
+// eSewa has no public deep link that pre-fills Send Money.
+// We open the app home and give the user copy buttons to paste details.
+function openEsewaApp() {
+  const ua = navigator.userAgent.toLowerCase();
+  if (/android|iphone|ipad|ipod/.test(ua)) {
     const a = document.createElement('a');
-    a.href = schemeUrl;
+    a.href = 'esewa://';
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-
-    // After 3 s, clean up listener and warn only if app never launched
-    setTimeout(() => {
-      document.removeEventListener('visibilitychange', onVisChange);
-      if (!appLaunched) {
-        toast('eSewa didn\'t open — please install it from the Play Store 📲');
-      }
-    }, 3000);
-
-  } else if (isIOS) {
-    let appLaunched = false;
-    const onVisChange = () => {
-      if (document.visibilityState === 'hidden') appLaunched = true;
-    };
-    document.addEventListener('visibilitychange', onVisChange);
-    window.location.href = schemeUrl;
-    setTimeout(() => {
-      document.removeEventListener('visibilitychange', onVisChange);
-      if (!appLaunched) window.open('https://esewa.com.np', '_blank');
-    }, 2500);
-
   } else {
     window.open('https://esewa.com.np', '_blank');
   }
+}
+
+function copyToClipboard(text, type) {
+  const btnId = type === 'phone' ? 'copyPhoneBtn' : 'copyAmountBtn';
+  const done = () => {
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      btn.style.background = '#1a6627';
+      setTimeout(() => { btn.textContent = orig; btn.style.background = '#60BB46'; }, 2000);
+    }
+  };
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(String(text)).then(done).catch(() => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+
+function fallbackCopy(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = String(text);
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); if (cb) cb(); } catch(e) { toast('Copy failed — select manually'); }
+  document.body.removeChild(ta);
 }
 
 function placeOrder() {
@@ -822,7 +835,7 @@ function confirmHTML() {
     <div style="background:#F0FBF2;border:1.5px solid #60BB46;border-radius:var(--r-sm);padding:1rem 1.25rem;margin-bottom:1.5rem;text-align:center;">
       <p style="font-size:0.88rem;color:#1a6627;font-weight:600;margin-bottom:0.5rem;">💚 Complete your eSewa payment</p>
       <p style="font-size:0.82rem;color:#3a7a40;margin-bottom:0.75rem;">Send <strong>Rs. ${o.total.toLocaleString()}</strong> to <strong>${SETTINGS.esewaPhone}</strong></p>
-      <button onclick="openEsewaApp('${SETTINGS.esewaPhone}',${o.total})" style="background:#60BB46;color:#fff;border:none;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:700;cursor:pointer;">Open eSewa →</button>
+      <button onclick="openEsewaApp()" style="background:#60BB46;color:#fff;border:none;padding:0.6rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:700;cursor:pointer;">Open eSewa →</button>
       <p style="font-size:0.72rem;color:#3a7a40;margin-top:0.6rem;">Send screenshot to our WhatsApp after payment.</p>
     </div>` : ''}
     <p style="color:var(--text-soft);font-size:0.85rem;margin-bottom:2rem;">We'll call <strong>${o.phone}</strong> shortly to confirm your order.</p>
