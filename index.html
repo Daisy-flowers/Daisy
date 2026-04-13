@@ -800,12 +800,18 @@ function paymentHTML() {
       <div class="pay-item-qr" id="pqr-${idx}">
         ${ep ? `
         <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
-          <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(ep)}&bgcolor=FFFFFF&color=1a6627&qzone=2"
-            alt="eSewa QR Code"
-            style="width:160px;height:160px;border-radius:12px;border:3px solid #60BB46;display:block;">
+          ${SETTINGS.esewaQrImage
+            ? `<div style="background:#fff;border-radius:16px;padding:0.75rem;border:3px solid #60BB46;box-shadow:0 4px 20px rgba(96,187,70,0.2);">
+                <img src="${SETTINGS.esewaQrImage}" alt="eSewa QR Code" style="width:200px;height:200px;object-fit:contain;display:block;border-radius:8px;">
+               </div>`
+            : `<div style="background:#fff;border-radius:16px;padding:2rem;border:2px dashed #60BB46;text-align:center;">
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">📷</div>
+                <div style="font-size:0.8rem;color:#3a7a40;font-weight:600;">QR not uploaded yet</div>
+                <div style="font-size:0.72rem;color:#5a9a60;margin-top:0.2rem;">Admin: upload QR in Settings</div>
+               </div>`
+          }
           <div style="text-align:center;">
-            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:#3a7a40;font-weight:700;">Send to eSewa</div>
+            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:#3a7a40;font-weight:700;">eSewa Number</div>
             <div style="font-size:1.15rem;font-weight:700;color:#1a6627;margin-top:0.15rem;">${ep}</div>
             <div style="font-size:1.8rem;font-weight:800;color:#1a6627;margin-top:0.1rem;">Rs. ${item.price.toLocaleString()}</div>
           </div>
