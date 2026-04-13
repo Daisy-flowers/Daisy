@@ -730,30 +730,47 @@ function selPay(id) {
 
 // ── ESEWA DEEP LINK ──────────────────────────
 function openEsewaApp(phone, amount) {
-  const ua = navigator.userAgent.toLowerCase();
+  const ua        = navigator.userAgent.toLowerCase();
   const isAndroid = /android/.test(ua);
   const isIOS     = /iphone|ipad|ipod/.test(ua);
 
-  // eSewa app deep links
-  const iosScheme    = `esewa://p?mobile=${phone}&amount=${amount}`;
-  const androidIntent = `intent://p?mobile=${phone}&amount=${amount}#Intent;scheme=esewa;package=com.f1soft.esewa;end`;
-  const webFallback  = `https://esewa.com.np`;
-
-  let launched = false;
+  // eSewa URL scheme — works on both Android & iOS if the app is installed.
+  // We deliberately do NOT use an Android intent:// URL with package= because
+  // that causes Play Store to open when the intent path doesn't match exactly.
+  const schemeUrl = `esewa://p?mobile=${phone}&amount=${amount}`;
 
   if (isAndroid) {
-    // Android intent URL opens eSewa app directly; if not installed, opens Play Store
-    window.location.href = androidIntent;
-    launched = true;
+    // Anchor-click approach: browser fires the URL scheme and hands off to the
+    // app. If the app is not installed the browser just does nothing — no
+    // Play Store redirect.
+    const a = document.createElement('a');
+    a.href = schemeUrl;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    // After 2.5 s, if the user is still on our page the app probably isn't
+    // installed — show a helpful toast instead of silently failing.
+    const t0 = Date.now();
+    setTimeout(() => {
+      if (document.visibilityState === 'visible' && Date.now() - t0 < 4000) {
+        toast('eSewa didn\'t open — make sure the app is installed 📲');
+      }
+    }, 2500);
+
   } else if (isIOS) {
-    // iOS URL scheme
-    window.location.href = iosScheme;
-    launched = true;
-    // Fallback to web after 2s if app not installed
-    setTimeout(() => { window.open(webFallback, '_blank'); }, 2000);
+    // iOS: navigate to scheme; fall back to web if app absent after 2 s
+    window.location.href = schemeUrl;
+    setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        window.open('https://esewa.com.np', '_blank');
+      }
+    }, 2000);
+
   } else {
     // Desktop — open eSewa web
-    window.open(webFallback, '_blank');
+    window.open('https://esewa.com.np', '_blank');
   }
 }
 
