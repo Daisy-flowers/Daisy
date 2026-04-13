@@ -733,16 +733,20 @@ function openEsewaApp(phone, amount) {
   const ua        = navigator.userAgent.toLowerCase();
   const isAndroid = /android/.test(ua);
   const isIOS     = /iphone|ipad|ipod/.test(ua);
-
-  // eSewa URL scheme — works on both Android & iOS if the app is installed.
-  // We deliberately do NOT use an Android intent:// URL with package= because
-  // that causes Play Store to open when the intent path doesn't match exactly.
   const schemeUrl = `esewa://p?mobile=${phone}&amount=${amount}`;
 
   if (isAndroid) {
-    // Anchor-click approach: browser fires the URL scheme and hands off to the
-    // app. If the app is not installed the browser just does nothing — no
-    // Play Store redirect.
+    // Track whether the browser tab went into the background.
+    // When eSewa opens, the browser fires visibilitychange → 'hidden'.
+    // We only show the "not installed" toast if that never happens.
+    let appLaunched = false;
+
+    const onVisChange = () => {
+      if (document.visibilityState === 'hidden') appLaunched = true;
+    };
+    document.addEventListener('visibilitychange', onVisChange);
+
+    // Trigger the URL scheme via anchor click (avoids Play Store redirect)
     const a = document.createElement('a');
     a.href = schemeUrl;
     a.style.display = 'none';
@@ -750,26 +754,27 @@ function openEsewaApp(phone, amount) {
     a.click();
     document.body.removeChild(a);
 
-    // After 2.5 s, if the user is still on our page the app probably isn't
-    // installed — show a helpful toast instead of silently failing.
-    const t0 = Date.now();
+    // After 3 s, clean up listener and warn only if app never launched
     setTimeout(() => {
-      if (document.visibilityState === 'visible' && Date.now() - t0 < 4000) {
-        toast('eSewa didn\'t open — make sure the app is installed 📲');
+      document.removeEventListener('visibilitychange', onVisChange);
+      if (!appLaunched) {
+        toast('eSewa didn\'t open — please install it from the Play Store 📲');
       }
-    }, 2500);
+    }, 3000);
 
   } else if (isIOS) {
-    // iOS: navigate to scheme; fall back to web if app absent after 2 s
+    let appLaunched = false;
+    const onVisChange = () => {
+      if (document.visibilityState === 'hidden') appLaunched = true;
+    };
+    document.addEventListener('visibilitychange', onVisChange);
     window.location.href = schemeUrl;
     setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        window.open('https://esewa.com.np', '_blank');
-      }
-    }, 2000);
+      document.removeEventListener('visibilitychange', onVisChange);
+      if (!appLaunched) window.open('https://esewa.com.np', '_blank');
+    }, 2500);
 
   } else {
-    // Desktop — open eSewa web
     window.open('https://esewa.com.np', '_blank');
   }
 }
